@@ -1,0 +1,528 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Observatoire IA Éducation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    color-scheme: light;
+    --bg: #eef1f3;
+    --paper: #ffffff;
+    --paper-2: #f6f8f9;
+    --ink: #182330;
+    --ink-soft: #4b5c6c;
+    --ink-faint: #7c8c9a;
+    --line: #d9e0e5;
+    --line-soft: #e6ebee;
+    --accent: #234a75;
+    --accent-ink: #17324f;
+    --accent-tint: #e4ecf3;
+    --gold: #a9762c;
+    --gold-tint: #f4ead8;
+    --teal: #1c7a63;
+    --teal-tint: #e0f0ea;
+    --plum: #6b3a6e;
+    --plum-tint: #f0e4f1;
+    --shadow: 0 1px 2px rgba(23,50,79,.06), 0 8px 24px -12px rgba(23,50,79,.16);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg: #10161d;
+      --paper: #171f28;
+      --paper-2: #1c2530;
+      --ink: #e7ecf1;
+      --ink-soft: #aab7c4;
+      --ink-faint: #7c8c9a;
+      --line: #2b3540;
+      --line-soft: #232c36;
+      --accent: #7fa8d4;
+      --accent-ink: #cfe0f2;
+      --accent-tint: #1e2f42;
+      --gold: #d4a44f;
+      --gold-tint: #35291a;
+      --teal: #5ec4a6;
+      --teal-tint: #163229;
+      --plum: #c98fcc;
+      --plum-tint: #2c1f2e;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg: #10161d;
+    --paper: #171f28;
+    --paper-2: #1c2530;
+    --ink: #e7ecf1;
+    --ink-soft: #aab7c4;
+    --ink-faint: #7c8c9a;
+    --line: #2b3540;
+    --line-soft: #232c36;
+    --accent: #7fa8d4;
+    --accent-ink: #cfe0f2;
+    --accent-tint: #1e2f42;
+    --gold: #d4a44f;
+    --gold-tint: #35291a;
+    --teal: #5ec4a6;
+    --teal-tint: #163229;
+    --plum: #c98fcc;
+    --plum-tint: #2c1f2e;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, sans-serif;
+    padding-inline: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,.serif{ font-family: "Fraunces", Georgia, serif; }
+  h1,h2,h3{ text-wrap: balance; color: var(--ink); margin: 0; }
+  a{ color: var(--accent); }
+  p{ line-height: 1.6; }
+  .mono{ font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+  .wrap{ max-width: 1180px; margin-inline:auto; padding-inline: 20px; }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner{ display:flex; align-items:center; gap:20px; padding-block: 12px; }
+  .brand{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .brand-mark{
+    width:34px; height:34px; border-radius: 9px; background: var(--accent);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .brand-mark svg{ width:18px; height:18px; }
+  .brand-name{ font-family:"Fraunces",serif; font-weight:700; font-size: 1rem; line-height:1.1; }
+  .brand-sub{ font-size:.68rem; color: var(--ink-faint); letter-spacing:.04em; text-transform:uppercase; }
+
+  nav.tabs{ display:flex; gap: 4px; overflow-x:auto; scrollbar-width:none; flex:1; }
+  nav.tabs::-webkit-scrollbar{ display:none; }
+  nav.tabs a{
+    white-space:nowrap; text-decoration:none; color: var(--ink-soft);
+    font-size:.86rem; font-weight:500; padding: 8px 12px; border-radius: 999px;
+  }
+  nav.tabs a:hover{ background: var(--paper-2); color: var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero{ padding-block: 40px 28px; border-bottom: 1px solid var(--line); }
+  .hero .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.06em;
+    color: var(--teal); text-transform:uppercase; margin-bottom: 14px;
+  }
+  .hero .eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background: var(--teal); }
+  .hero h1{ font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight:600; max-width: 18ch; }
+  .hero p.lead{ max-width: 62ch; color: var(--ink-soft); font-size: 1.02rem; margin-top:14px; }
+
+  .hero-meta{ display:flex; flex-wrap:wrap; gap: 10px 28px; margin-top: 22px; }
+  .hero-meta div{ font-size:.82rem; color: var(--ink-faint); }
+  .hero-meta strong{ display:block; color: var(--ink); font-family:"Fraunces",serif; font-size:1.15rem; font-weight:600; }
+
+  .hero-grid{ display:grid; grid-template-columns: 1fr 300px; gap: 40px; align-items:start; }
+  @media (max-width: 860px){ .hero-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- identity card ---------- */
+  .identity{
+    background: var(--paper); border:1px solid var(--line); border-radius: var(--radius);
+    padding: 22px; box-shadow: var(--shadow); display:flex; flex-direction:column; gap:14px;
+  }
+  .identity-head{ display:flex; align-items:center; gap:14px; }
+  .identity-avatar{
+    width:52px; height:52px; border-radius: 50%; background: var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-family:"Fraunces",serif; font-weight:700; font-size:1.15rem; letter-spacing:.02em;
+  }
+  .identity-name{ font-family:"Fraunces",serif; font-weight:700; font-size:1.08rem; line-height:1.25; color: var(--ink); }
+  .identity-roles{ display:flex; flex-direction:column; gap:2px; }
+  .identity-role{ font-size:.78rem; color: var(--ink-soft); line-height:1.35; }
+  .identity-role.primary{ color: var(--teal); font-weight:600; }
+  .identity-divider{ height:1px; background: var(--line-soft); }
+  .identity-note{ font-size:.78rem; color: var(--ink-faint); line-height:1.5; margin:0; }
+
+  /* ---------- sections ---------- */
+  section{ padding-block: 40px; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom: 22px; flex-wrap:wrap; }
+  .section-num{
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; color: var(--paper);
+    background: var(--accent); width:26px; height:26px; border-radius:7px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .section-head h2{ font-size: 1.45rem; font-weight:600; }
+  .section-head .count{ font-size:.8rem; color: var(--ink-faint); font-family:"IBM Plex Mono",monospace; }
+  .section-intro{ color: var(--ink-soft); max-width: 72ch; margin: 0 0 24px; }
+
+  /* ---------- filter chips ---------- */
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 22px; }
+  .chip{
+    font-size:.8rem; font-weight:500; padding: 7px 14px; border-radius:999px;
+    border:1px solid var(--line); background: var(--paper); color: var(--ink-soft);
+    cursor:pointer; font-family:"Work Sans",sans-serif; transition: background .15s, color .15s, border-color .15s;
+  }
+  .chip:hover{ border-color: var(--accent); color: var(--ink); }
+  .chip.active{ background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ---------- source cards ---------- */
+  .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+  .card{
+    background: var(--paper); border:1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; display:flex; flex-direction:column; gap:10px; box-shadow: var(--shadow);
+  }
+  .card-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{
+    font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.03em;
+    padding: 3px 8px; border-radius:6px; text-transform:uppercase; font-weight:500;
+  }
+  .tag.fr{ background: var(--accent-tint); color: var(--accent-ink); }
+  .tag.eu{ background: var(--gold-tint); color: var(--gold); }
+  .tag.unesco{ background: var(--teal-tint); color: var(--teal); }
+  .tag.franco{ background: var(--plum-tint); color: var(--plum); }
+  .tag.recherche{ background: var(--paper-2); color: var(--ink-soft); border:1px solid var(--line); }
+  .card h3{ font-size: 1.02rem; font-weight:600; line-height:1.3; }
+  .card p{ font-size: .88rem; color: var(--ink-soft); margin:0; flex:1; }
+  .card-foot{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:4px; padding-top:10px; border-top:1px solid var(--line-soft); }
+  .card-foot .freq{ font-size:.72rem; color: var(--ink-faint); font-family:"IBM Plex Mono",monospace; }
+  .card-foot a{ font-size:.82rem; font-weight:600; text-decoration:none; color: var(--accent); display:inline-flex; align-items:center; gap:4px; }
+  .card-foot a:hover{ text-decoration: underline; }
+
+  /* ---------- regulation timeline ---------- */
+  .reg-list{ display:flex; flex-direction:column; gap:0; border-top:1px solid var(--line); }
+  .reg-item{ display:grid; grid-template-columns: 130px 1fr; gap: 18px; padding-block: 16px; border-bottom:1px solid var(--line); }
+  .reg-date{ font-family:"IBM Plex Mono",monospace; font-size:.8rem; color: var(--accent); font-weight:500; padding-top:2px; }
+  .reg-body h3{ font-size: .98rem; font-weight:600; margin-bottom:4px; }
+  .reg-body p{ font-size:.87rem; color: var(--ink-soft); margin:0 0 6px; }
+  .reg-body a{ font-size:.8rem; font-weight:600; text-decoration:none; }
+  .reg-body a:hover{ text-decoration:underline; }
+  @media (max-width: 560px){ .reg-item{ grid-template-columns: 1fr; gap:4px; } }
+
+  /* ---------- agent prompts ---------- */
+  .agent-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap:16px; }
+  .agent-card{ background: var(--paper); border:1px solid var(--line); border-radius: var(--radius); padding:20px; box-shadow: var(--shadow); display:flex; flex-direction:column; gap:12px; }
+  .agent-card .agent-num{ font-family:"IBM Plex Mono",monospace; font-size:.7rem; color: var(--teal); text-transform:uppercase; letter-spacing:.05em; }
+  .agent-card h3{ font-size:1.05rem; font-weight:600; }
+  .agent-card .desc{ font-size:.85rem; color: var(--ink-soft); margin:0; }
+  .prompt-box{
+    background: var(--paper-2); border:1px solid var(--line-soft); border-radius:10px;
+    padding: 12px 14px; font-family:"IBM Plex Mono",monospace; font-size:.76rem; line-height:1.6;
+    color: var(--ink); white-space: pre-wrap; position:relative;
+  }
+  .copy-btn{
+    align-self:flex-start; font-family:"Work Sans",sans-serif; font-size:.78rem; font-weight:600;
+    background: var(--accent); color:#fff; border:none; border-radius:8px; padding:8px 14px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px; transition: background .15s;
+  }
+  .copy-btn:hover{ background: var(--accent-ink); }
+  .copy-btn.copied{ background: var(--teal); }
+
+  /* ---------- methodology ---------- */
+  .method-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 16px; }
+  .method-card{ padding:16px 0; }
+  .method-card .n{ font-family:"Fraunces",serif; font-size:1.6rem; color: var(--accent); font-weight:600; display:block; margin-bottom:6px;}
+  .method-card h3{ font-size:.94rem; font-weight:600; margin-bottom:6px; }
+  .method-card p{ font-size:.84rem; color: var(--ink-soft); margin:0; }
+
+  footer{ padding-block: 30px calc(30px + env(safe-area-inset-bottom, 0px)); }
+  footer p{ font-size:.78rem; color: var(--ink-faint); max-width:70ch; }
+  .footer-signature{ display:flex; align-items:center; gap:12px; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+  .footer-signature .identity-avatar{ width:40px; height:40px; font-size:.95rem; }
+  .footer-signature-name{ font-family:"Fraunces",serif; font-weight:600; font-size:.92rem; color: var(--ink); }
+  .footer-signature-role{ font-size:.76rem; color: var(--ink-faint); }
+
+  ::selection{ background: var(--accent-tint); }
+</style>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 12.5l2 2 4-4.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">Observatoire IA Éducation</div>
+        <div class="brand-sub">Luc Masson · IA référent académique</div>
+      </div>
+    </div>
+    <nav class="tabs">
+      <a href="#vue-ensemble">1. Vue d'ensemble</a>
+      <a href="#ia-generale">2. IA générale</a>
+      <a href="#ia-education">3. IA &amp; éducation</a>
+      <a href="#reglementation">4. Réglementation</a>
+      <a href="#agent">5. Agent de veille</a>
+      <a href="#methodologie">6. Méthodologie</a>
+    </nav>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Sources publiques vérifiées · France · Union européenne · UNESCO · Francophonie</div>
+      <h1>Le tableau de bord de veille sur l'IA et l'IA en éducation</h1>
+      <p class="lead">Un répertoire structuré de sources officielles et scientifiquement reconnues pour suivre l'actualité de l'intelligence artificielle en général, et son intégration en éducation et en pédagogie en particulier — accompagné de gabarits de recherche prêts à l'emploi pour un agent IA de veille.</p>
+      <div class="hero-meta">
+        <div><strong>28</strong>sources référencées</div>
+        <div><strong>5</strong>familles de sources</div>
+        <div><strong>4</strong>gabarits d'agent de veille</div>
+        <div><strong id="today-date">28 sept. 2026</strong>dernière vérification</div>
+      </div>
+    </div>
+    <aside class="identity">
+      <div class="identity-head">
+        <div class="identity-avatar">LM</div>
+        <div class="identity-name">Luc Masson</div>
+      </div>
+      <div class="identity-divider"></div>
+      <div class="identity-roles">
+        <span class="identity-role primary">IA référent académique</span>
+        <span class="identity-role">Interlocuteur académique au numérique éducatif</span>
+      </div>
+      <div class="identity-divider"></div>
+      <p class="identity-note">Cet observatoire est maintenu dans le cadre d'une mission de veille et d'accompagnement sur l'intelligence artificielle en contexte scolaire et pédagogique.</p>
+    </aside>
+  </div>
+</div>
+
+<!-- 1. VUE D'ENSEMBLE -->
+<section id="vue-ensemble">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">1</span><h2>Vue d'ensemble et critères de sélection</h2></div>
+    <p class="section-intro">Cet outil rassemble exclusivement des sources <strong>publiques et officielles</strong> — institutions gouvernementales, agences européennes, organisations internationales et organismes de recherche publics — à l'exclusion des blogs, médias spécialisés et contenus d'opinion, même de qualité. Quatre critères ont guidé la sélection :</p>
+    <div class="method-grid">
+      <div class="method-card"><span class="n">01</span><h3>Origine institutionnelle</h3><p>Ministères, agences publiques, institutions de l'Union européenne, organisations onusiennes ou organismes de recherche publics — jamais un éditeur privé ou un blog, même expert.</p></div>
+      <div class="method-card"><span class="n">02</span><h3>Ancrage francophone</h3><p>Sources en langue française : France, institutions européennes en version FR, UNESCO en français, et francophonie institutionnelle (Québec, Belgique, Suisse) pour élargir le corpus sans sortir du champ officiel.</p></div>
+      <div class="method-card"><span class="n">03</span><h3>Reconnaissance scientifique</h3><p>Pour la recherche, priorité aux organismes publics évalués par les pairs ou mandatés par l'État (IFé, HAL, OCDE, UNESCO) plutôt qu'aux plateformes de diffusion grand public.</p></div>
+      <div class="method-card"><span class="n">04</span><h3>Traçabilité</h3><p>Chaque fiche indique le type d'émetteur, la fréquence de mise à jour observée et un lien direct vers la source primaire — jamais un relais secondaire.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. IA GENERALE -->
+<section id="ia-generale">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">2</span><h2>Sources — Intelligence artificielle (général)</h2><span class="count">13 sources</span></div>
+    <p class="section-intro">Réglementation, stratégie publique et recherche sur l'IA, hors champ éducatif : cadre juridique européen, doctrine nationale, données de référence.</p>
+    <div class="chips" data-group="generale">
+      <button class="chip active" data-filter="all">Toutes</button>
+      <button class="chip" data-filter="fr">France</button>
+      <button class="chip" data-filter="eu">Union européenne</button>
+      <button class="chip" data-filter="recherche">Recherche</button>
+    </div>
+    <div class="grid" id="grid-generale"></div>
+  </div>
+</section>
+
+<!-- 3. IA EDUCATION -->
+<section id="ia-education">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">3</span><h2>Sources — IA en éducation et en pédagogie</h2><span class="count">15 sources</span></div>
+    <p class="section-intro">Cadres d'usage, référentiels de compétences, ressources pédagogiques et recherche appliquée à l'enseignement et à la formation.</p>
+    <div class="chips" data-group="education">
+      <button class="chip active" data-filter="all">Toutes</button>
+      <button class="chip" data-filter="fr">France</button>
+      <button class="chip" data-filter="eu">Union européenne</button>
+      <button class="chip" data-filter="unesco">UNESCO</button>
+      <button class="chip" data-filter="franco">Francophonie</button>
+      <button class="chip" data-filter="recherche">Recherche</button>
+    </div>
+    <div class="grid" id="grid-education"></div>
+  </div>
+</section>
+
+<!-- 4. REGLEMENTATION -->
+<section id="reglementation">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">4</span><h2>Repères réglementaires et calendrier</h2></div>
+    <p class="section-intro">Les échéances qui structurent l'année de veille : entrée en application du règlement européen sur l'IA (AI Act) et jalons français en éducation.</p>
+    <div class="reg-list" id="reg-list"></div>
+  </div>
+</section>
+
+<!-- 5. AGENT -->
+<section id="agent">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">5</span><h2>Gabarits pour un agent IA de veille</h2></div>
+    <p class="section-intro">Quatre instructions prêtes à copier dans un agent de recherche (Claude, ou tout assistant capable de naviguer le web) pour automatiser la veille sur ce périmètre. Chaque gabarit restreint volontairement l'agent aux sources listées ci-dessus.</p>
+    <div class="agent-grid" id="agent-grid"></div>
+  </div>
+</section>
+
+<!-- 6. METHODOLOGIE -->
+<section id="methodologie">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">6</span><h2>Méthodologie de mise à jour</h2></div>
+    <ol style="padding-left:20px; display:flex; flex-direction:column; gap:14px; max-width:70ch;">
+      <li><strong>Fréquence conseillée.</strong> Un passage hebdomadaire sur les sources réglementaires (Commission européenne, CNIL, ministère) et mensuel sur les sources de recherche (UNESCO, IFé, OCDE), qui publient moins souvent mais en profondeur.</li>
+      <li><strong>Vérification de primauté.</strong> Toujours remonter au document ou à la page institutionnelle d'origine avant de citer un chiffre, une date ou une obligation légale — les relais (presse, syndicats, cabinets de conseil) peuvent être utiles pour l'analyse, mais jamais pour la source du fait.</li>
+      <li><strong>Datation explicite.</strong> Les cadres cités ici évoluent : le cadre d'usage de l'IA en éducation (juin 2025) fait l'objet d'une actualisation pilotée par la CREIA, et le calendrier de l'AI Act a déjà été révisé une fois par le règlement dit « Omnibus » (juillet 2026). Vérifier la date de dernière modification affichée sur chaque page officielle.</li>
+      <li><strong>Limites du présent outil.</strong> Cette page est une carte des sources, pas une agrégation automatique de leur contenu : elle n'interroge aucune de ces sources en direct et doit être recroisée avec les pages d'origine, dont les contenus peuvent avoir changé depuis la dernière vérification indiquée en en-tête.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-signature">
+      <div class="identity-avatar">LM</div>
+      <div>
+        <div class="footer-signature-name">Luc Masson</div>
+        <div class="footer-signature-role">IA référent académique · Interlocuteur académique au numérique éducatif</div>
+      </div>
+    </div>
+    <p>Répertoire constitué à partir de sources publiques consultées en septembre 2026. Les intitulés, URL et échéances réglementaires peuvent évoluer : vérifier systématiquement la page d'origine avant citation. Aucune donnée n'est collectée par cette page ; les filtres fonctionnent entièrement dans le navigateur.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var SOURCES_GENERALE = [
+    {tag:"eu", label:"UE", title:"AI Act — Bureau de l'IA de la Commission", desc:"Actualités officielles sur l'application du règlement européen sur l'IA : entrée en vigueur des obligations, transparence, calendrier.", url:"https://digital-strategy.ec.europa.eu/fr/policies/regulatory-framework-ai", freq:"Suivi continu"},
+    {tag:"eu", label:"UE", title:"Calendrier de mise en œuvre de l'AI Act", desc:"Calendrier officiel (traduction eTranslation) des échéances du règlement IA, article par article, par le service desk de la Commission.", url:"https://ai-act-service-desk.ec.europa.eu/fr/ai-act/timeline/calendrier-de-mise-en-oeuvre-de-la-legislation-de-lue-sur-lia", freq:"Mise à jour continue"},
+    {tag:"eu", label:"UE", title:"EUR-Lex — textes officiels de l'Union", desc:"Portail juridique officiel de l'UE : texte consolidé du règlement (UE) 2024/1689 (AI Act) et de ses actes modificatifs.", url:"https://eur-lex.europa.eu/homepage.html", freq:"Publication au fil des actes"},
+    {tag:"eu", label:"UE", title:"Représentation de la Commission en France", desc:"Communiqués en français de la Commission européenne sur l'IA et le numérique, relayés pour le public français.", url:"https://france.representation.ec.europa.eu/", freq:"Hebdomadaire"},
+    {tag:"fr", label:"France", title:"CNIL — Intelligence artificielle", desc:"Recommandations, position sur le RGPD appliqué à l'IA, fiches pratiques et actualité réglementaire de l'autorité française de protection des données.", url:"https://www.cnil.fr/fr/ia-comment-se-mettre-en-conformite", freq:"Mensuel"},
+    {tag:"fr", label:"France", title:"Vie-publique.fr — dossiers IA", desc:"Service de la Direction de l'information légale et administrative (Premier ministre) : synthèses neutres des débats publics et textes en cours.", url:"https://www.vie-publique.fr/", freq:"Hebdomadaire"},
+    {tag:"fr", label:"France", title:"Légifrance", desc:"Service public de diffusion du droit français : lois, décrets et transposition nationale des textes européens sur l'IA.", url:"https://www.legifrance.gouv.fr/", freq:"Publication au fil des textes"},
+    {tag:"fr", label:"France", title:"France Stratégie", desc:"Organisme de réflexion rattaché au Premier ministre ; rapports sur les impacts économiques et sociaux de l'IA, dont les travaux ayant nourri la stratégie nationale.", url:"https://www.strategie.gouv.fr/", freq:"Ponctuel (rapports)"},
+    {tag:"recherche", label:"Recherche", title:"Inria — Intelligence artificielle", desc:"Institut national de recherche en sciences du numérique ; expertises et publications de référence sur les fondements techniques de l'IA.", url:"https://www.inria.fr/fr/intelligence-artificielle", freq:"Mensuel"},
+    {tag:"recherche", label:"Recherche", title:"CNRS — Dossiers IA", desc:"Centre national de la recherche scientifique ; articles de vulgarisation scientifique et points d'étape sur la recherche française en IA.", url:"https://www.cnrs.fr/fr", freq:"Mensuel"},
+    {tag:"recherche", label:"Recherche", title:"HAL — Archive ouverte", desc:"Plateforme nationale de dépôt de publications scientifiques ; recherche par mot-clé « intelligence artificielle » pour accéder aux articles évalués par les pairs.", url:"https://hal.science/", freq:"Continu (dépôts)"},
+    {tag:"recherche", label:"Recherche", title:"OCDE — Politiques de l'IA", desc:"Organisation de coopération et de développement économiques ; observatoire des politiques publiques d'IA (OECD.AI) et publications en français.", url:"https://www.oecd.org/fr/publications/serie-sur-l-intelligence-artificielle-et-l-avenir-des-competences_20730603.html", freq:"Trimestriel"},
+    {tag:"eu", label:"UE", title:"Programme pour une Europe numérique", desc:"Actualités de la stratégie numérique de l'UE (Digital Strategy), incluant IA, données et compétences numériques, en français.", url:"https://digital-strategy.ec.europa.eu/fr/index_fr", freq:"Hebdomadaire"}
+  ];
+
+  var SOURCES_EDUCATION = [
+    {tag:"fr", label:"France", title:"Cadre d'usage de l'IA en éducation", desc:"Texte de référence du ministère de l'Éducation nationale (juin 2025), fruit d'une consultation nationale ; principes, limites et conditions d'usage en établissement.", url:"https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647", freq:"Actualisation pilotée par la CREIA"},
+    {tag:"fr", label:"France", title:"Éduscol — IA et usages en éducation", desc:"Portail pédagogique de la direction générale de l'enseignement scolaire : ressources, parcours de formation Magistère, enjeux éthiques.", url:"https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education", freq:"Continu"},
+    {tag:"fr", label:"France", title:"Cadre d'usage — document PDF officiel", desc:"Version PDF téléchargeable du cadre d'usage de juin 2025 : principes, cas d'usage autorisés, recommandation d'une IA frugale.", url:"https://www.education.gouv.fr/media/227697/download", freq:"Version stable (juin 2025)"},
+    {tag:"fr", label:"France", title:"Feuilles de route numériques du ministère", desc:"Stratégie numérique pour l'éducation 2023-2027 et feuille de route IA 2026-2027 : gouvernance, formation des enseignants, outils.", url:"https://www.education.gouv.fr/feuilles-de-route-450426", freq:"Annuel"},
+    {tag:"fr", label:"France", title:"CNIL — Enseignants et systèmes d'IA", desc:"FAQ officielle destinée aux enseignants : bonnes pratiques, formation préalable, vigilance sur les données d'élèves.", url:"https://www.cnil.fr/fr/enseignant-usage-systeme-ia", freq:"Mise à jour ponctuelle"},
+    {tag:"fr", label:"France", title:"CNIL — Responsables de traitement en éducation", desc:"FAQ complémentaire pour les chefs d'établissement et autorités académiques : obligations légales, analyse d'impact, délégué à la protection des données.", url:"https://www.cnil.fr/fr/education-mise-en-place-systeme-ia", freq:"Mise à jour ponctuelle"},
+    {tag:"unesco", label:"UNESCO", title:"UNESCO — IA dans l'éducation", desc:"Page thématique de l'UNESCO : guide pour les décideurs politiques, recommandation sur l'éthique de l'IA (2021) et actualité des travaux internationaux.", url:"https://www.unesco.org/fr/digital-education/artificial-intelligence", freq:"Mensuel"},
+    {tag:"unesco", label:"UNESCO", title:"Référentiel de compétences en IA — enseignants", desc:"15 compétences réparties en cinq domaines et trois niveaux de progression (Acquérir, Approfondir, Créer) pour la formation des enseignants à l'IA.", url:"https://www.unesco.org/fr/articles/referentiel-de-competences-en-ia-pour-les-enseignants", freq:"Version stable (2025)"},
+    {tag:"unesco", label:"UNESCO", title:"Référentiel de compétences en IA — apprenants", desc:"12 compétences réparties en quatre dimensions pour intégrer des objectifs d'apprentissage sur l'IA dans les programmes scolaires.", url:"https://www.unesco.org/fr/articles/referentiel-de-competences-en-ia-pour-les-apprenants", freq:"Version stable (2025)"},
+    {tag:"eu", label:"UE", title:"Lignes directrices éthiques pour les éducateurs", desc:"Commission européenne : lignes directrices actualisées sur l'usage éthique de l'IA et des données dans l'enseignement et l'apprentissage (édition 2026).", url:"https://education.ec.europa.eu/fr/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence", freq:"Révision périodique"},
+    {tag:"eu", label:"UE", title:"EPALE France — plateforme Erasmus+", desc:"Plateforme électronique officielle pour l'éducation et la formation des adultes en Europe ; ressources et retours d'expérience sur l'IA en pédagogie.", url:"https://epale.ec.europa.eu/fr", freq:"Hebdomadaire"},
+    {tag:"franco", label:"Francophonie", title:"Québec — Guide IA générative pour enseignants", desc:"Ministère de l'Éducation du Québec : cadre pédagogique, éthique et légal d'usage de l'IA générative, coproduit avec l'observatoire OBVIA.", url:"https://cdn-contenu.quebec.ca/cdn-contenu/education/Numerique/Guide-utilisation-pedagogique-ethique-legale-IA-personnel-enseignant.pdf", freq:"Mise à jour annuelle"},
+    {tag:"franco", label:"Francophonie", title:"OBVIA — Observatoire IA et numérique", desc:"Observatoire international sur les impacts sociétaux de l'IA et du numérique (Québec) ; recherche interdisciplinaire évaluée par les pairs.", url:"https://www.obvia.ca/", freq:"Mensuel"},
+    {tag:"recherche", label:"Recherche", title:"IFé — Institut français de l'Éducation", desc:"Institut de recherche de l'ENS de Lyon dédié aux sciences de l'éducation ; publications et dossiers sur le numérique éducatif.", url:"https://ife.ens-lyon.fr/", freq:"Mensuel"},
+    {tag:"recherche", label:"Recherche", title:"Réseau Canopé", desc:"Opérateur public du ministère de l'Éducation nationale pour la formation et l'accompagnement pédagogique ; ressources IA validées par l'institution.", url:"https://www.reseau-canope.fr/", freq:"Hebdomadaire"}
+  ];
+
+  var REGULATION = [
+    {date:"Août 2025", title:"AI Act — obligations pour les modèles GPAI", desc:"Entrée en application des règles concernant les modèles d'IA à usage général (fournisseurs de fondation, transparence technique).", url:"https://artificialintelligenceact.eu/fr/implementation-timeline/"},
+    {date:"2 août 2026", title:"AI Act — application générale et transparence", desc:"Majorité des dispositions applicables : obligations de transparence (art. 50), pouvoirs renforcés des autorités, activation du régime de sanctions.", url:"https://digital-strategy.ec.europa.eu/fr/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august"},
+    {date:"27 juil. 2026", title:"Règlement « AI Omnibus » (UE 2026/1744)", desc:"Texte modifiant le calendrier de l'AI Act et simplifiant certaines obligations ; entré en vigueur le 27 juillet 2026.", url:"https://ai-act-service-desk.ec.europa.eu/fr/ai-act/timeline/calendrier-de-mise-en-oeuvre-de-la-legislation-de-lue-sur-lia"},
+    {date:"15 oct. 2026", title:"UNESCO — consultation mondiale sur la gouvernance de l'IA en éducation", desc:"Date limite de contribution à la consultation mondiale de l'UNESCO sur la gouvernance de l'IA dans les systèmes éducatifs ; synthèse des politiques attendue lors de la Digital Learning Week 2027.", url:"https://www.unesco.org/en/digital-education/artificial-intelligence/consultation"},
+    {date:"2 déc. 2026", title:"AI Act — échéance article 50(2)", desc:"Date limite pour les fournisseurs de contenus synthétiques déjà sur le marché avant août 2026 de se conformer au marquage lisible par machine.", url:"https://www.dastra.eu/fr/blog/calendrier-ai-act-toutes-les-echeances-a-connaitre-pour-rester-conforme-au-regl/60277"},
+    {date:"2 août 2027", title:"AI Act — déploiement complet", desc:"Échéance visée par la Commission pour l'application intégrale du règlement européen sur l'IA à l'ensemble des dispositions.", url:"https://ai-act-service-desk.ec.europa.eu/fr/ai-act/timeline/calendrier-de-mise-en-oeuvre-de-la-legislation-de-lue-sur-lia"},
+    {date:"Rentrée 2027", title:"Enseignement obligatoire de l'IA en classe de seconde", desc:"Communication officielle en Conseil des ministres (1er sept. 2026, rentrée scolaire 2026) : un enseignement obligatoire de l'IA sera mis en place dès la rentrée 2027, avec programme et formation des professeurs élaborés durant l'année 2026-2027.", url:"https://www.education.gouv.fr/la-rentree-scolaire-2026-communication-en-conseil-des-ministres-505564"}
+  ];
+
+  var AGENT_PROMPTS = [
+    {n:"Gabarit 01", title:"Veille hebdomadaire — actualité réglementaire", desc:"À lancer chaque semaine pour suivre l'AI Act, la CNIL et le ministère.",
+      prompt:"Tu es mon agent de veille réglementaire sur l'IA. Consulte exclusivement ces sources officielles : digital-strategy.ec.europa.eu, ai-act-service-desk.ec.europa.eu, eur-lex.europa.eu, cnil.fr, education.gouv.fr, eduscol.education.gouv.fr, legifrance.gouv.fr.\n\nProduis une note structurée et numérotée (max 1 page) listant :\n1. Toute nouvelle échéance ou obligation de l'AI Act publiée depuis 7 jours\n2. Toute publication de la CNIL sur l'IA en éducation ou en général\n3. Toute mise à jour du cadre d'usage de l'IA en éducation (ministère)\n\nPour chaque élément : date, source (lien direct), résumé en 2 phrases, impact pour un enseignant/formateur.\nN'utilise aucune source secondaire (presse, blog, cabinet de conseil)."},
+    {n:"Gabarit 02", title:"Veille mensuelle — recherche et référentiels", desc:"À lancer chaque mois pour suivre UNESCO, OCDE, IFé, OBVIA.",
+      prompt:"Tu es mon agent de veille scientifique sur l'IA en éducation. Consulte exclusivement : unesco.org/fr, oecd.org/fr, ife.ens-lyon.fr, obvia.ca, hal.science, reseau-canope.fr.\n\nRecherche toute publication, rapport ou référentiel des 30 derniers jours portant sur :\n- les compétences en IA pour enseignants ou apprenants\n- les usages pédagogiques évalués de l'IA générative\n- les recommandations éthiques en contexte scolaire\n\nRestitue sous forme de plan numéroté : 1) titre et émetteur, 2) date de publication, 3) apport principal en 3 lignes, 4) lien vers le document original (jamais un résumé tiers)."},
+    {n:"Gabarit 03", title:"Fiche de synthèse pédagogique", desc:"À lancer ponctuellement pour transformer une source en support de cours.",
+      prompt:"À partir de cette source officielle : [COLLER L'URL], rédige une fiche pédagogique structurée et numérotée pour un cours sur l'IA en éducation :\n1. Émetteur et statut du document (officiel, recherche, recommandation)\n2. Contexte et date de publication\n3. Trois points clés à retenir\n4. Une citation exacte et sourcée, entre guillemets\n5. Deux questions de discussion pour un groupe d'apprenants\n6. Limites ou débats non tranchés par la source\n\nN'invente aucune information absente du document source ; indique explicitement toute incertitude."},
+    {n:"Gabarit 04", title:"Comparatif francophone", desc:"À lancer pour comparer les approches France / Québec / UE sur un sujet précis.",
+      prompt:"Compare la doctrine officielle sur le sujet suivant : [PRÉCISER LE SUJET, ex. « évaluation des élèves assistée par IA »], en t'appuyant uniquement sur :\n- France : education.gouv.fr, cnil.fr\n- Québec : quebec.ca/education, obvia.ca\n- Union européenne : education.ec.europa.eu\n- UNESCO : unesco.org/fr\n\nPrésente un tableau comparatif numéroté par juridiction (1. France, 2. Québec, 3. UE, 4. UNESCO) avec pour chacune : position officielle, texte de référence et lien, degré de contrainte (obligatoire / recommandé / en discussion)."}
+  ];
+
+  function cardHTML(s){
+    return '<div class="card" data-tag="'+s.tag+'">'
+      + '<div class="card-tags"><span class="tag '+s.tag+'">'+s.label+'</span></div>'
+      + '<h3>'+s.title+'</h3>'
+      + '<p>'+s.desc+'</p>'
+      + '<div class="card-foot"><span class="freq">'+s.freq+'</span><a href="'+s.url+'" target="_blank" rel="noopener">Consulter →</a></div>'
+      + '</div>';
+  }
+
+  function renderGrid(id, data){
+    var el = document.getElementById(id);
+    el.innerHTML = data.map(cardHTML).join("");
+  }
+  renderGrid("grid-generale", SOURCES_GENERALE);
+  renderGrid("grid-education", SOURCES_EDUCATION);
+
+  function wireFilters(gridId){
+    var group = document.querySelector('.chips[data-group="' + (gridId === "grid-generale" ? "generale" : "education") + '"]');
+    if(!group) return;
+    var chips = group.querySelectorAll(".chip");
+    chips.forEach(function(chip){
+      chip.addEventListener("click", function(){
+        chips.forEach(function(c){ c.classList.remove("active"); });
+        chip.classList.add("active");
+        var f = chip.getAttribute("data-filter");
+        var cards = document.getElementById(gridId).querySelectorAll(".card");
+        cards.forEach(function(card){
+          card.hidden = !(f === "all" || card.getAttribute("data-tag") === f);
+        });
+      });
+    });
+  }
+  wireFilters("grid-generale");
+  wireFilters("grid-education");
+
+  var regList = document.getElementById("reg-list");
+  regList.innerHTML = REGULATION.map(function(r){
+    return '<div class="reg-item"><div class="reg-date">'+r.date+'</div><div class="reg-body"><h3>'+r.title+'</h3><p>'+r.desc+'</p><a href="'+r.url+'" target="_blank" rel="noopener">Source officielle →</a></div></div>';
+  }).join("");
+
+  var agentGrid = document.getElementById("agent-grid");
+  agentGrid.innerHTML = AGENT_PROMPTS.map(function(a, i){
+    return '<div class="agent-card">'
+      + '<span class="agent-num">'+a.n+'</span>'
+      + '<h3>'+a.title+'</h3>'
+      + '<p class="desc">'+a.desc+'</p>'
+      + '<div class="prompt-box" id="prompt-'+i+'">'+a.prompt.replace(/</g,"&lt;")+'</div>'
+      + '<button class="copy-btn" data-idx="'+i+'">Copier le gabarit</button>'
+      + '</div>';
+  }).join("");
+
+  agentGrid.querySelectorAll(".copy-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var idx = btn.getAttribute("data-idx");
+      var text = AGENT_PROMPTS[idx].prompt;
+      var done = function(){
+        var original = "Copier le gabarit";
+        btn.textContent = "Copié ✓";
+        btn.classList.add("copied");
+        setTimeout(function(){ btn.textContent = original; btn.classList.remove("copied"); }, 1800);
+      };
+      try{
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(idx, done); });
+      }catch(e){ fallbackCopy(idx, done); }
+    });
+  });
+
+  function fallbackCopy(idx, done){
+    var box = document.getElementById("prompt-"+idx);
+    var range = document.createRange();
+    range.selectNodeContents(box);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    try{ document.execCommand("copy"); done(); }catch(e){}
+    sel.removeAllRanges();
+  }
+})();
+</script>
+
+</body></html>
