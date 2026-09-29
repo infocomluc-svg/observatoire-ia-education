@@ -1,2 +1,39 @@
-# observatoire-ia-education
-Outil de veille IA education
+# Veille hebdomadaire IA & éducation
+# Chaque lundi à 7 h 00 (heure de Paris en été, 6 h en hiver) + lancement manuel possible.
+name: Veille hebdomadaire IA & éducation
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"      # lundi 05:00 UTC
+  workflow_dispatch: {}       # bouton « Run workflow » dans l'onglet Actions
+
+permissions:
+  contents: write            # pour enregistrer le fichier de veille dans le dépôt
+
+concurrency:
+  group: veille-hebdo
+  cancel-in-progress: false  # jamais deux exécutions (donc deux factures) en parallèle
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Interroger Claude (Haiku, 5 recherches max)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/veille_hebdo.py
+
+      - name: Enregistrer la veille dans le dépôt
+        run: |
+          git config user.name  "veille-bot"
+          git config user.email "veille-bot@users.noreply.github.com"
+          git add veille/
+          git diff --cached --quiet || git commit -m "Veille hebdomadaire du $(date +%F)"
+          git push

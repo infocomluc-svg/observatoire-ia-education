@@ -263,6 +263,7 @@
       <a href="#reglementation">4. Réglementation</a>
       <a href="#agent">5. Agent de veille</a>
       <a href="#methodologie">6. Méthodologie</a>
+      <a href="#veille-semaine">7. Veille de la semaine</a>
     </nav>
   </div>
 </div>
@@ -370,6 +371,16 @@
       <li><strong>Datation explicite.</strong> Les cadres cités ici évoluent : le cadre d'usage de l'IA en éducation (juin 2025) fait l'objet d'une actualisation pilotée par la CREIA, et le calendrier de l'AI Act a déjà été révisé une fois par le règlement dit « Omnibus » (juillet 2026). Vérifier la date de dernière modification affichée sur chaque page officielle.</li>
       <li><strong>Limites du présent outil.</strong> Cette page est une carte des sources, pas une agrégation automatique de leur contenu : elle n'interroge aucune de ces sources en direct et doit être recroisée avec les pages d'origine, dont les contenus peuvent avoir changé depuis la dernière vérification indiquée en en-tête.</li>
     </ol>
+  </div>
+</section>
+
+<!-- 7. VEILLE DE LA SEMAINE (générée chaque lundi par GitHub Actions) -->
+<section id="veille-semaine">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">7</span><h2>Veille de la semaine</h2><span class="count" id="veille-periode"></span></div>
+    <p id="veille-synthese" style="max-width:70ch; color:var(--ink-soft);">La première veille automatique sera publiée lundi prochain à 7 h.</p>
+    <div class="grid" id="grid-veille"></div>
+    <p style="font-size:.78rem; color:var(--ink-faint); margin-top:14px;">Sélection automatique réalisée par un agent IA à partir de recherches web ; seules les actualités dont le lien a été retrouvé par la recherche sont affichées. Vérifier la source avant toute citation.</p>
   </div>
 </section>
 
@@ -522,6 +533,27 @@
     try{ document.execCommand("copy"); done(); }catch(e){}
     sel.removeAllRanges();
   }
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var CAT = {"education":["unesco","Éducation"],"reglementation":["eu","Réglementation"],"ia-generale":["fr","IA générale"]};
+  function esc(t){ var d=document.createElement("div"); d.textContent=t==null?"":String(t); return d.innerHTML; }
+  function lien(u){ return /^https?:\/\//.test(u||"") ? esc(u) : "#"; }
+  fetch("veille/derniere.json",{cache:"no-store"}).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(v){
+    document.getElementById("veille-periode").textContent = "du "+v.periode.du+" au "+v.periode.au;
+    document.getElementById("veille-synthese").textContent = v.synthese || "";
+    var html = (v.items||[]).map(function(i){
+      var c = CAT[i.categorie] || ["recherche","Actualité"];
+      return '<div class="card"><div class="card-tags"><span class="tag '+c[0]+'">'+c[1]+'</span></div>'
+        + '<h3>'+esc(i.titre)+'</h3><p>'+esc(i.resume)+'</p>'
+        + '<div class="card-foot"><span class="freq">'+esc(i.source)+(i.date?' · '+esc(i.date):'')+'</span>'
+        + '<a href="'+lien(i.url)+'" target="_blank" rel="noopener">Lire →</a></div></div>';
+    }).join("");
+    document.getElementById("grid-veille").innerHTML = html || '<p style="color:var(--ink-faint)">Aucune actualité notable cette semaine.</p>';
+  }).catch(function(){});
 })();
 </script>
 
