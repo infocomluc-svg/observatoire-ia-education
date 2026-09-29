@@ -31,9 +31,48 @@ jobs:
         run: python scripts/veille_hebdo.py
 
       - name: Enregistrer la veille dans le dépôt
+        id: enregistrer
         run: |
           git config user.name  "veille-bot"
           git config user.email "veille-bot@users.noreply.github.com"
           git add veille/
-          git diff --cached --quiet || git commit -m "Veille hebdomadaire du $(date +%F)"
-          git push
+          if git diff --cached --quiet; then
+            echo "maj=non" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Veille hebdomadaire du $(date +%F)"
+            git push
+            echo "maj=oui" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Alerte e-mail — mise à jour publiée
+        if: steps.enregistrer.outputs.maj == 'oui'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Agent de veille <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "Observatoire IA Éducation — nouvelle veille publiée"
+          body: |
+            L'agent de veille a publié une nouvelle mise à jour de l'Observatoire IA Éducation.
+
+            Page : https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/#veille-semaine
+            Détail de l'exécution : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Alerte e-mail — échec de la veille
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Agent de veille <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "Observatoire IA Éducation — échec de la veille"
+          body: |
+            La veille hebdomadaire a échoué. Journal : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
