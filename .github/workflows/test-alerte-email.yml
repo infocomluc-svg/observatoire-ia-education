@@ -1,0 +1,21 @@
+name: Test alerte e-mail
+on:
+  push:
+    branches: [test-alerte-email]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Agent de veille <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: "Observatoire IA Éducation — e-mail de test"
+          body: |
+            Ceci est un test de l'alerte e-mail de la veille hebdomadaire.
+            Si vous lisez ce message, les 3 secrets MAIL_* sont bien configurés.
