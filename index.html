@@ -229,6 +229,13 @@
   .gen-checks input{ accent-color: var(--accent); margin:0; }
   .gen-checks label:has(input:checked){ border-color: var(--accent); color: var(--ink); background: var(--accent-tint); }
   .gen-hint{ font-size:.74rem; color: var(--ink-faint); }
+  .gen-add{ display:flex; gap:6px; }
+  .gen-add input{ flex:1; min-width:0; }
+  .gen-add .copy-btn{ flex:none; }
+  .gen-checks label.perso{ border-style:dashed; }
+  .gen-checks .rm{ border:none; background:none; color: var(--ink-faint); cursor:pointer; font-size:.95rem; line-height:1; padding:0 0 0 2px; }
+  .gen-checks .rm:hover{ color: var(--gold); }
+  .gen-add-err{ color: var(--gold); }
   .gen-out{ padding:20px; display:flex; flex-direction:column; gap:12px; background: var(--paper-2); }
   .gen-out .lbl{ font-size:.8rem; font-weight:600; }
   .prompt-box{
@@ -542,7 +549,7 @@
       fields:[
         {id:"periode", label:"Période couverte", type:"select", options:PERIODES},
         {id:"public", label:"Impact à analyser pour", type:"select", options:PUBLICS},
-        {id:"sources", label:"Sources autorisées", type:"checks", options:REG_DOMAINS, min:1}
+        {id:"sources", label:"Sources autorisées", type:"checks", options:REG_DOMAINS, min:1, add:true}
       ],
       build:function(v){
         return "Tu es mon agent de veille réglementaire sur l'IA. Consulte exclusivement ces sources officielles : "+(v.sources.length?v.sources.join(", "):trou("au moins une source"))+".\n\n"
@@ -555,7 +562,7 @@
       fields:[
         {id:"periode", label:"Période couverte", type:"select", options:PERIODES, def:1},
         {id:"themes", label:"Thèmes suivis", type:"checks", min:1, options:["les compétences en IA des enseignants et des apprenants","les usages pédagogiques évalués de l'IA générative","les recommandations éthiques en contexte scolaire","l'évaluation des apprentissages à l'ère de l'IA"], def:[0,1,2]},
-        {id:"sources", label:"Sources autorisées", type:"checks", options:RECH_DOMAINS, min:1}
+        {id:"sources", label:"Sources autorisées", type:"checks", options:RECH_DOMAINS, min:1, add:true}
       ],
       build:function(v){
         return "Tu es mon agent de veille scientifique sur l'IA en éducation. Consulte exclusivement : "+(v.sources.length?v.sources.join(", "):trou("au moins une source"))+".\n\n"
@@ -579,10 +586,12 @@
       fields:[
         {id:"sujet", label:"Sujet à comparer", type:"text", required:true, placeholder:"ex. évaluation des élèves assistée par IA",
           suggestions:["évaluation des élèves assistée par IA","usage de l'IA générative par les enseignants","protection des données des élèves","formation des enseignants à l'IA","détection des contenus générés par IA"]},
-        {id:"juris", label:"Juridictions comparées", type:"checks", options:Object.keys(JURIS), def:[0,1,2,3], min:2}
+        {id:"juris", label:"Juridictions comparées", type:"checks", options:Object.keys(JURIS), def:[0,1,2,3], min:2},
+        {id:"autres", label:"Sources complémentaires (facultatif)", type:"checks", options:[], add:true}
       ],
       build:function(v){
         var j = v.juris.length ? v.juris.map(function(k){ return "- "+k+" : "+JURIS[k]; }).join("\n") : trou("au moins deux juridictions");
+        if(v.autres.length) j += "\n- Sources complémentaires : "+v.autres.join(", ");
         return "Compare la doctrine officielle sur le sujet suivant : « "+(v.sujet||trou("sujet"))+" », en t'appuyant uniquement sur :\n"+j+"\n\n"
           +"Présente un tableau comparatif numéroté par juridiction ("+(v.juris.map(function(k,i){return (i+1)+". "+k;}).join(", ")||"…")+") avec pour chacune : position officielle, texte de référence et lien, degré de contrainte (obligatoire / recommandé / en discussion).";
       }}
@@ -607,6 +616,21 @@
     return '<a class="copy-btn ghost llm-link" data-i="'+i+'" href="#" target="_blank" rel="noopener">'+esc(l.name)+'</a>';
   }).join(""));
 
+  /* Sources personnelles : mémorisées dans ce navigateur, par gabarit et par champ */
+  var STORE_KEY = "observatoire-sources-perso";
+  var PERSO = {};
+  try{ PERSO = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ PERSO = {}; }
+  function savePerso(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(PERSO)); }catch(e){} }
+  function persoKey(fid){ return GABARITS[current].n+":"+fid; }
+  function normSource(t){
+    t = (t||"").trim().replace(/^https?:\/\//i,"").replace(/^www\./i,"").replace(/\/+$/,"");
+    return (/^[^\s\/]+\.[a-z]{2,}(\/\S*)?$/i.test(t)) ? t : "";
+  }
+  function checkHTML(o, on, perso){
+    return '<label'+(perso?' class="perso"':'')+'><input type="checkbox" value="'+esc(o)+'"'+(on?' checked':'')+'>'+esc(o)
+      +(perso?'<button type="button" class="rm" data-rm="'+esc(o)+'" aria-label="Retirer '+esc(o)+'" title="Retirer cette source">×</button>':'')+'</label>';
+  }
+
   function fieldHTML(f){
     var req = f.required ? ' <span class="req">*</span>' : '';
     if(f.type==="select"){
@@ -615,8 +639,13 @@
     }
     if(f.type==="checks"){
       return '<div class="gen-field"><span class="lbl">'+esc(f.label)+'</span><div class="gen-checks" data-f="'+f.id+'">'
-        + f.options.map(function(o,i){ var on = f.def ? f.def.indexOf(i)>-1 : true;
-            return '<label><input type="checkbox" value="'+esc(o)+'"'+(on?' checked':'')+'>'+esc(o)+'</label>'; }).join("")+'</div></div>';
+        + f.options.map(function(o,i){ return checkHTML(o, f.def ? f.def.indexOf(i)>-1 : true, false); }).join("")
+        + (f.add ? (PERSO[persoKey(f.id)]||[]).map(function(o){ return checkHTML(o, true, true); }).join("") : "")
+        + '</div>'
+        + (f.add ? '<div class="gen-add"><input type="text" data-add="'+f.id+'" aria-label="Ajouter une source" placeholder="ex. francetravail.fr">'
+            + '<button type="button" class="copy-btn ghost" data-addbtn="'+f.id+'">+ Ajouter</button></div>'
+            + '<span class="gen-hint" data-adderr="'+f.id+'">Vos sources ajoutées sont conservées dans ce navigateur.</span>' : '')
+        + '</div>';
     }
     if(f.type==="text"){
       var dl = f.suggestions ? '<datalist id="dl-'+f.id+'">'+f.suggestions.map(function(o){return '<option value="'+esc(o)+'">';}).join("")+'</datalist>' : '';
@@ -685,6 +714,33 @@
     current = +t.getAttribute("data-i");
     tabsEl.querySelectorAll(".gen-tab").forEach(function(b){ b.setAttribute("aria-selected", String(b===t)); });
     renderForm();
+  });
+  function addSource(fid){
+    var input = formEl.querySelector('[data-add="'+fid+'"]'), hint = formEl.querySelector('[data-adderr="'+fid+'"]');
+    var src = normSource(input.value);
+    if(!src){ hint.textContent = "Adresse non reconnue : saisissez un domaine ou une URL (ex. francetravail.fr)."; hint.classList.add("gen-add-err"); input.focus(); return; }
+    var box = formEl.querySelector('.gen-checks[data-f="'+fid+'"]');
+    var exist = Array.prototype.filter.call(box.querySelectorAll("input"), function(c){ return c.value.toLowerCase()===src.toLowerCase(); })[0];
+    if(exist){ exist.checked = true; }
+    else{
+      var k = persoKey(fid); (PERSO[k] = PERSO[k]||[]).push(src); savePerso();
+      box.insertAdjacentHTML("beforeend", checkHTML(src, true, true));
+    }
+    input.value = ""; hint.textContent = "Source ajoutée. Vos sources ajoutées sont conservées dans ce navigateur."; hint.classList.remove("gen-add-err");
+    update();
+  }
+  formEl.addEventListener("click", function(e){
+    var b = e.target.closest("[data-addbtn]"); if(b){ addSource(b.getAttribute("data-addbtn")); return; }
+    var rm = e.target.closest("[data-rm]");
+    if(rm){
+      e.preventDefault();
+      var fid = rm.closest(".gen-checks").getAttribute("data-f"), k = persoKey(fid), val = rm.getAttribute("data-rm");
+      PERSO[k] = (PERSO[k]||[]).filter(function(x){ return x!==val; }); savePerso();
+      rm.closest("label").remove(); update();
+    }
+  });
+  formEl.addEventListener("keydown", function(e){
+    if(e.key==="Enter" && e.target.getAttribute("data-add")){ e.preventDefault(); addSource(e.target.getAttribute("data-add")); }
   });
   formEl.addEventListener("input", update);
   formEl.addEventListener("change", function(e){
