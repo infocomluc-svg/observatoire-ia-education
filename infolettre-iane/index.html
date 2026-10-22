@@ -115,6 +115,8 @@ nav.index{overflow-x:visible}
 nav.index ol{flex-wrap:wrap;white-space:normal}
 nav.index a.home{background:var(--navy);color:var(--surface);font-weight:600}
 @media (max-width:560px){nav.index{position:static}nav.index a{font-size:13px;padding:5px 8px}}
+.pill.mine{background:var(--c4s);color:var(--c4)}
+h3.mine-h{display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
@@ -345,7 +347,7 @@ Signature : Luc Masson, IA référent — Référent en numérique éducatif —
   <ol class="steps">
     <li><span><strong>Vers le 20 du mois :</strong> mise à jour automatique de cet observatoire et préparation du brouillon suivant.</span></li>
     <li><span><strong>Relecture :</strong> vérifier les éléments marqués « à confirmer » et compléter avec les actualités de la DRANE et du site académique.</span></li>
-    <li><span><strong>Ajouts personnels :</strong> intégrer les informations reçues par d'autres canaux (infolettres officielles, réunions IEN).</span></li>
+    <li><span><strong>Ajouts personnels :</strong> ajouter ses propres sujets dans chaque rubrique depuis l'<a href="https://infocomluc-svg.github.io/observatoire-ia-education/infolettre-iane/ajouter.html">espace d'ajout de sujets</a>. Ils s'affichent dans les rubriques 2 à 4 et dans le brouillon de l'infolettre.</span></li>
     <li><span><strong>Diffusion :</strong> copier le brouillon validé dans l'outil d'envoi académique au début du mois suivant.</span></li>
   </ol>
   <p class="note">Les sites de la DRANE Lille et de l'économie-gestion LP n'autorisent pas la lecture automatique : leurs liens mènent à la page d'accueil, et leurs actualités sont à ajouter à la main. Les liens « à confirmer » (Cour des comptes, LaSuite) mènent aussi à l'accueil du site, faute de page dédiée trouvée.</p>
@@ -368,10 +370,55 @@ document.querySelectorAll('button.copy').forEach(function(b){
     try{navigator.clipboard.writeText(t).then(function(){done('Copié')},fallback)}catch(e){fallback()}
   });
 });
-var links=[].slice.call(document.querySelectorAll('nav.index a'));
+var links=[].slice.call(document.querySelectorAll('nav.index a[href^="#"]'));
 var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
 function spy(){var y=window.scrollY+100,cur=0;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur)})}
 window.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+
+<script>
+/* Sujets ajoutés à la main par Luc Masson (fichier ajouts.json, publié avec la page sur GitHub) */
+(function(){
+  var RUB={actualites:{id:'actualites',num:'2.9',label:'1'},diplomes:{id:'diplomes',num:'3.9',label:'2'},agenda:{id:'agenda',num:'4.9',label:'3'}};
+  function fdate(d){if(!d)return'';var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(d);if(!m)return d;var mois=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];return parseInt(m[3],10)+' '+mois[parseInt(m[2],10)-1]+' '+m[1]}
+  function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+  function render(items){
+    Object.keys(RUB).forEach(function(k){
+      var list=items.filter(function(i){return i.rubrique===k});
+      if(!list.length)return;
+      var sec=document.getElementById(RUB[k].id);if(!sec)return;
+      var h=el('h3','mine-h');var n=el('span','num',RUB[k].num);h.appendChild(n);h.appendChild(document.createTextNode('Sujets choisis par Luc Masson'));
+      var ul=el('ul','items');
+      list.forEach(function(i){
+        var li=el('li');var tag=el('div','tag');tag.appendChild(el('b',null,i.source||''));tag.appendChild(document.createTextNode(fdate(i.date)));
+        var pic=el('div','pic',i.picto||'📌');pic.setAttribute('aria-hidden','true');
+        var it=el('div','it');var st=el('strong',null,i.titre||'');st.appendChild(document.createTextNode(' '));st.appendChild(el('span','pill mine','choix de Luc'));it.appendChild(st);
+        if(i.texte)it.appendChild(el('p',null,i.texte));
+        if(i.lien&&/^https?:\/\//.test(i.lien)){var src=el('div','src');var a=el('a',null,i.source?('Lire sur '+i.source):'Lire la source');a.href=i.lien;a.target='_blank';a.rel='noopener';src.appendChild(a);it.appendChild(src)}
+        li.appendChild(tag);li.appendChild(pic);li.appendChild(it);ul.appendChild(li);
+      });
+      sec.appendChild(h);sec.appendChild(ul);
+    });
+    var pre=document.getElementById('nl1');if(!pre)return;
+    var lines=pre.textContent.split('\n');
+    var heads={actualites:'🏛️ 1.',diplomes:'🎓 2.',agenda:'📅 3.'};
+    ['agenda','diplomes','actualites'].forEach(function(k){
+      var list=items.filter(function(i){return i.rubrique===k});if(!list.length)return;
+      var start=lines.findIndex(function(l){return l.indexOf(heads[k])===0});if(start<0)return;
+      var end=-1;for(var x=start+2;x<lines.length;x++){if(lines[x].indexOf('━━━')===0){end=x;break}}
+      if(end<0)return;
+      var add=[];list.forEach(function(i,n){
+        add.push((i.picto||'📌')+' '+i.titre+(i.source||i.date?' ('+[i.source,fdate(i.date)].filter(Boolean).join(', ')+')':''));
+        if(i.texte)add.push(i.texte);if(i.lien)add.push('👉 '+i.lien);add.push('');
+      });
+      Array.prototype.splice.apply(lines,[end,0].concat(add));
+    });
+    pre.textContent=lines.join('\n');
+  }
+  try{
+    fetch('ajouts.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){render((d&&d.items)||[])}).catch(function(){});
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
