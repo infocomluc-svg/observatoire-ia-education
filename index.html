@@ -69,15 +69,20 @@ p{line-height:1.6}
 .brand-mark svg{width:20px; height:20px}
 .brand-name{font-family:var(--f-display); font-weight:700; font-size:1.05rem; line-height:1.1; color:var(--hero-ink)}
 .brand-sub{font-size:.68rem; color:var(--hero-soft); letter-spacing:.05em; text-transform:uppercase}
-nav.tabs{display:flex; flex-wrap:wrap; gap:6px; flex:1 1 520px; min-width:0}
-nav.tabs a{white-space:nowrap; text-decoration:none; color:var(--hero-ink); font-size:.82rem; font-weight:600; padding:7px 12px; border-radius:999px;
+nav.tabs{display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:6px; flex:1 1 100%; min-width:0}
+nav.tabs a{display:flex; align-items:center; justify-content:center; text-align:center; min-width:0; text-decoration:none; color:var(--hero-ink);
+  font-size:.8rem; font-weight:600; line-height:1.2; padding:8px 6px; border-radius:12px; min-height:40px;
   background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); transition:background .2s, transform .2s}
 nav.tabs a:hover{background:rgba(255,255,255,.22); transform:translateY(-1px)}
 nav.tabs a.on{background:var(--hero-ink); color:var(--hero-a)}
+nav.tabs a.hl{background:linear-gradient(135deg,var(--sun),var(--coral)); border-color:transparent; color:#1a1033}
+nav.tabs .sm{display:none}
+@media (max-width:1100px){ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))} }
 @media (max-width:860px){
   .topbar{position:static}
-  nav.tabs{flex-basis:100%}
-  nav.tabs a{font-size:.78rem; padding:6px 10px}
+  .topbar-inner{gap:10px}
+  nav.tabs .lg{display:none} nav.tabs .sm{display:inline}
+  nav.tabs a{font-size:.74rem; padding:7px 4px; min-height:36px}
 }
 
 /* ---------- bandeau ---------- */
@@ -132,7 +137,8 @@ section:last-of-type{border-bottom:none}
 #agent{--sc:var(--coral); --sct:var(--coral-tint)}
 #methodologie{--sc:var(--accent); --sct:var(--accent-tint)}
 #veille-semaine{--sc:var(--teal); --sct:var(--teal-tint); background:linear-gradient(180deg,var(--teal-tint),transparent 70%)}
-#infolettre{--sc:var(--plum); --sct:var(--plum-tint); background:linear-gradient(180deg,var(--plum-tint),transparent 70%)}
+#infolettre{--sc:var(--coral); --sct:var(--coral-tint); background:linear-gradient(180deg,var(--coral-tint),transparent 80%); padding-block:36px}
+#infolettre .section-num{background:linear-gradient(135deg,var(--sun),var(--coral)); font-size:1.2rem}
 .section-head{display:flex; align-items:center; gap:14px; margin-bottom:20px; flex-wrap:wrap}
 .section-num{font-family:var(--f-display); font-weight:700; font-size:1.1rem; color:#fff; background:var(--sc); width:42px; height:42px; border-radius:12px;
   display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 8px 18px -8px var(--sc); transform:rotate(-4deg)}
@@ -270,15 +276,15 @@ footer a{color:var(--hero-ink)}
         <div class="brand-sub">Luc Masson · IA référent académique</div>
       </div>
     </div>
-    <nav class="tabs">
-      <a href="#vue-ensemble">1. Vue d'ensemble</a>
-      <a href="#ia-generale">2. IA générale</a>
-      <a href="#ia-education">3. IA &amp; éducation</a>
-      <a href="#reglementation">4. Réglementation</a>
-      <a href="#agent">5. Générateur de requêtes</a>
-      <a href="#methodologie">6. Méthodologie</a>
-      <a href="#veille-semaine">7. Veille de la semaine</a>
-      <a href="#infolettre">8. Info lettre IANE</a>
+    <nav class="tabs" aria-label="Sommaire">
+      <a href="#infolettre" class="hl"><span class="lg">✉️ Info lettre IANE</span><span class="sm">✉️ Info lettre</span></a>
+      <a href="#vue-ensemble"><span class="lg">1. Vue d'ensemble</span><span class="sm">1 · Aperçu</span></a>
+      <a href="#ia-generale"><span class="lg">2. IA générale</span><span class="sm">2 · IA gén.</span></a>
+      <a href="#ia-education"><span class="lg">3. IA &amp; éducation</span><span class="sm">3 · IA éduc.</span></a>
+      <a href="#reglementation"><span class="lg">4. Réglementation</span><span class="sm">4 · Réglem.</span></a>
+      <a href="#agent"><span class="lg">5. Générateur de requêtes</span><span class="sm">5 · Requêtes</span></a>
+      <a href="#methodologie"><span class="lg">6. Méthodologie</span><span class="sm">6 · Méthode</span></a>
+      <a href="#veille-semaine"><span class="lg">7. Veille de la semaine</span><span class="sm">7 · Veille</span></a>
     </nav>
   </div>
 </div>
@@ -311,6 +317,22 @@ footer a{color:var(--hero-ink)}
     </aside>
   </div>
 </div>
+
+<!-- INFO LETTRE IANE (mise en avant) -->
+<section id="infolettre">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num" aria-hidden="true">✉️</span><h2>Info lettre IANE Académie de Lille</h2></div>
+    <p class="section-intro">L'observatoire mensuel du numérique éducatif et de l'IA destiné aux professeurs d'économie-gestion de l'académie de Lille : actualités institutionnelles, ressources par diplôme, agenda des formations et brouillon de l'infolettre du mois.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-tags"><span class="tag fr">Académie de Lille</span><span class="tag recherche">Économie-gestion</span></div>
+        <h3>Info lettre IANE · édition mensuelle</h3>
+        <p>Sources officielles vérifiées, pictos par rubrique, brouillon prêt à copier pour la diffusion aux 1 142 collègues. Mise à jour automatique le 20 de chaque mois.</p>
+        <div class="card-foot"><span class="freq">Mensuel</span><a href="infolettre-iane/">Ouvrir l'Info lettre →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- 1. VUE D'ENSEMBLE -->
 <section id="vue-ensemble">
@@ -414,21 +436,7 @@ footer a{color:var(--hero-ink)}
   </div>
 </section>
 
-<!-- 8. INFO LETTRE IANE -->
-<section id="infolettre">
-  <div class="wrap">
-    <div class="section-head"><span class="section-num">8</span><h2>Info lettre IANE Académie de Lille</h2></div>
-    <p class="section-intro">L'observatoire mensuel du numérique éducatif et de l'IA destiné aux professeurs d'économie-gestion de l'académie de Lille : actualités institutionnelles, ressources par diplôme, agenda des formations et brouillon de l'infolettre du mois.</p>
-    <div class="grid">
-      <div class="card">
-        <div class="card-tags"><span class="tag fr">Académie de Lille</span><span class="tag recherche">Économie-gestion</span></div>
-        <h3>Info lettre IANE · édition mensuelle</h3>
-        <p>Sources officielles vérifiées, pictos par rubrique, brouillon prêt à copier pour la diffusion aux 1 142 collègues. Mise à jour automatique le 20 de chaque mois.</p>
-        <div class="card-foot"><span class="freq">Mensuel</span><a href="infolettre-iane/">Ouvrir l'Info lettre →</a></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <footer>
   <div class="wrap">
