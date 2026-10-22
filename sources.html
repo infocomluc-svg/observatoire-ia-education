@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Ajout de sources · Observatoire IA Éducation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : formulaire et liste côte à côte sur grand écran, étapes de publication en bas */
+:root{
+  --bg:#f3f5fb; --paper:#ffffff; --ink:#141b34; --muted:#46506e; --line:#dde2f0;
+  --accent:#3046c8; --accent-tint:#e6eaff; --coral:#e5484d; --sun:#f2b705; --hero:#1b2a8f; --hero-ink:#ffffff;
+  --fr:#3046c8; --frt:#e6eaff; --eu:#c25a00; --eut:#fff0e0; --un:#00897b; --unt:#ddf5f1; --fo:#8a3fc7; --fot:#f3e8fd; --re:#e5484d; --ret:#ffe9ea;
+  --f-display:"Fraunces",Georgia,serif; --f-body:"Work Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1022; --paper:#151a33; --ink:#eef1ff; --muted:#b3bad8; --line:#283058; --accent:#8c9bff; --accent-tint:#232b5c; --coral:#ff7b7f; --hero:#151f6e;
+  --fr:#8c9bff; --frt:#232b5c; --eu:#ffaa5c; --eut:#3a2614; --un:#4fd6c4; --unt:#123632; --fo:#c99bf5; --fot:#2e1d45; --re:#ff7b7f; --ret:#3d1c22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1022; --paper:#151a33; --ink:#eef1ff; --muted:#b3bad8; --line:#283058; --accent:#8c9bff; --accent-tint:#232b5c; --coral:#ff7b7f; --hero:#151f6e;
+  --fr:#8c9bff; --frt:#232b5c; --eu:#ffaa5c; --eut:#3a2614; --un:#4fd6c4; --unt:#123632; --fo:#c99bf5; --fot:#2e1d45; --re:#ff7b7f; --ret:#3d1c22; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+header{background:var(--hero);color:var(--hero-ink);padding-block:22px 26px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+main.wrap{padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--f-display);margin:0;line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(24px,4vw,34px)}
+h2{font-size:20px;margin-bottom:12px}
+.back{display:inline-flex;font-weight:600;font-size:14px;text-decoration:none;color:#1a1033;background:linear-gradient(135deg,var(--sun),var(--coral));padding:8px 14px;border-radius:999px;margin-bottom:14px}
+header p{color:#d9defc;max-width:66ch;margin:8px 0 0}
+a{color:var(--accent)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+form{display:grid;gap:14px}
+label{display:grid;gap:5px;font-weight:600;font-size:14px}
+label small{font-weight:400;color:var(--muted)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+.btn{font-family:var(--f-body);font-weight:700;font-size:14px;border:1px solid var(--accent);border-radius:999px;padding:10px 16px;cursor:pointer;background:var(--accent);color:#fff;text-decoration:none;display:inline-flex;justify-content:center}
+.btn.ghost{background:transparent;color:var(--accent)}
+.msg{font-size:14px;color:var(--accent);min-height:1.2em;margin:0}
+.msg.err{color:var(--coral)}
+ul.list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ul.list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px;border-radius:10px;background:var(--bg);border-top:4px solid var(--tc,var(--accent))}
+ul.list li.empty{display:block;border-top:0;color:var(--muted);font-style:italic}
+.t-fr{--tc:var(--fr)} .t-eu{--tc:var(--eu)} .t-unesco{--tc:var(--un)} .t-franco{--tc:var(--fo)} .t-recherche{--tc:var(--re)}
+.li-t{font-weight:700;line-height:1.3}
+.li-m{font-family:var(--f-mono);font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.del{background:none;border:1px solid var(--line);border-radius:999px;color:var(--coral);cursor:pointer;font-size:13px;padding:4px 10px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 14px;display:grid;gap:10px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:8px}
+.steps li::before{content:counter(s);font-family:var(--f-mono);color:var(--accent);font-weight:500}
+pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-size:12.5px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;max-height:240px;overflow:auto;margin:10px 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.publish{margin-top:20px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="back" href="./">← Retour à l'Observatoire IA Éducation</a>
+    <h1>Ajouter des sources à l'observatoire</h1>
+    <p>Vos sources s'affichent dans les sections 2 « IA générale » ou 3 « IA &amp; éducation », avec la mention « ajoutée par Luc ». Elles sont vérifiées chaque lundi avec les autres et servent aussi à la veille de la semaine.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="cols">
+    <div class="panel">
+      <h2>1. Nouvelle source</h2>
+      <form id="f" novalidate>
+        <div class="row2">
+          <label for="section">Section
+            <select id="section">
+              <option value="education">3. IA &amp; éducation</option>
+              <option value="generale">2. IA générale</option>
+            </select>
+          </label>
+          <label for="tag">Origine
+            <select id="tag">
+              <option value="fr">France</option><option value="eu">Union européenne</option><option value="unesco">UNESCO</option>
+              <option value="franco">Francophonie</option><option value="recherche">Recherche</option>
+            </select>
+          </label>
+        </div>
+        <label for="nom">Nom de la source
+          <input id="nom" type="text" maxlength="120" placeholder="Ex. CARDIE de Lille — innovation pédagogique">
+        </label>
+        <label for="url">Adresse <small>commençant par https://</small>
+          <input id="url" type="url" placeholder="https://…">
+        </label>
+        <label for="desc">Description <small>une ou deux phrases</small>
+          <textarea id="desc" maxlength="400" placeholder="Ce que publie cette source et son intérêt pour la veille."></textarea>
+        </label>
+        <label for="freq">Fréquence de publication
+          <input id="freq" type="text" maxlength="40" placeholder="Ex. Mensuel">
+        </label>
+        <button class="btn" type="submit">Ajouter la source</button>
+        <p class="msg" id="msg" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Mes sources ajoutées</h2>
+      <ul class="list" id="list"></ul>
+    </div>
+  </div>
+
+  <div class="panel publish">
+    <h2>2. Publier sur l'observatoire</h2>
+    <ol class="steps">
+      <li><span>Cliquez sur <strong>« Copier le fichier »</strong>.</span></li>
+      <li><span>Cliquez sur <strong>« Ouvrir le fichier sur GitHub »</strong> (connectez-vous si besoin).</span></li>
+      <li><span>Dans l'éditeur GitHub, sélectionnez tout le contenu, collez, puis cliquez sur <strong>« Commit changes »</strong>.</span></li>
+      <li><span>Vos sources apparaissent sur l'observatoire une à deux minutes plus tard.</span></li>
+    </ol>
+    <div class="actions">
+      <button class="btn" type="button" id="copy">Copier le fichier</button>
+      <a class="btn ghost" href="https://github.com/infocomluc-svg/observatoire-ia-education/edit/main/sources-perso.json" target="_blank" rel="noopener">Ouvrir le fichier sur GitHub</a>
+    </div>
+    <p class="msg" id="copymsg" aria-live="polite"></p>
+    <pre id="out"></pre>
+  </div>
+</main>
+
+<script>
+(function(){
+  var SEC={generale:'2. IA générale',education:'3. IA & éducation'};
+  var TAG={fr:'France',eu:'UE',unesco:'UNESCO',franco:'Francophonie',recherche:'Recherche'};
+  var KEY='obs-sources-perso';
+  var data={sources:[]};
+  var $=function(id){return document.getElementById(id)};
+  function norm(d){return {sources:(d&&d.sources)||[]}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
+  function render(){
+    var ul=$('list');ul.innerHTML='';
+    if(!data.sources.length){var e=document.createElement('li');e.className='empty';e.textContent='Aucune source ajoutée pour l\'instant.';ul.appendChild(e)}
+    data.sources.forEach(function(x,n){
+      var li=document.createElement('li');li.className='t-'+x.tag;
+      var t=document.createElement('div');
+      var a=document.createElement('div');a.className='li-t';a.textContent=x.nom;
+      var m=document.createElement('div');m.className='li-m';m.textContent=SEC[x.section]+' · '+TAG[x.tag]+' · '+x.url;
+      t.appendChild(a);t.appendChild(m);
+      var d=document.createElement('button');d.className='del';d.type='button';d.textContent='Retirer';
+      d.addEventListener('click',function(){data.sources.splice(n,1);save();render()});
+      li.appendChild(t);li.appendChild(d);ul.appendChild(li);
+    });
+    $('out').textContent=JSON.stringify(data,null,2);
+  }
+  $('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    var nom=$('nom').value.trim(), url=$('url').value.trim(), msg=$('msg');msg.className='msg';
+    if(!nom){msg.className='msg err';msg.textContent='Indiquez le nom de la source.';$('nom').focus();return}
+    if(!/^https?:\/\/\S+$/.test(url)){msg.className='msg err';msg.textContent='L\'adresse doit commencer par https:// et ne pas contenir d\'espace.';$('url').focus();return}
+    if(data.sources.some(function(x){return x.url===url})){msg.className='msg err';msg.textContent='Cette adresse est déjà dans vos sources.';return}
+    data.sources.push({section:$('section').value,tag:$('tag').value,nom:nom,url:url,desc:$('desc').value.trim(),freq:$('freq').value.trim()});
+    save();render();
+    msg.textContent='Source ajoutée. Pensez à la publier (étape 2).';
+    ['nom','url','desc','freq'].forEach(function(id){$(id).value=''});
+  });
+  $('copy').addEventListener('click',function(){
+    var t=$('out').textContent, m=$('copymsg');
+    function sel(){var r=document.createRange();r.selectNodeContents($('out'));var s=window.getSelection();s.removeAllRanges();s.addRange(r);m.textContent='Texte sélectionné : copiez-le avec Ctrl+C (ou Copier sur téléphone).'}
+    try{navigator.clipboard.writeText(t).then(function(){m.textContent='Fichier copié. Ouvrez-le sur GitHub et collez-le à la place du contenu.'},sel)}catch(e){sel()}
+  });
+  var local=null;try{local=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+  fetch('sources-perso.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+    data=norm(d);
+    if(local&&(local.sources||[]).length&&JSON.stringify(norm(local))!==JSON.stringify(data)){data=norm(local);$('msg').textContent='Modifications non publiées retrouvées sur cet appareil.'}
+    render();
+  }).catch(function(){if(local)data=norm(local);render()});
+  render();
+})();
+</script>
+</body>
+</html>

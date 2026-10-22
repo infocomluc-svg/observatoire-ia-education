@@ -49,6 +49,8 @@
   --shadow-hover:0 2px 4px rgba(0,0,0,.4), 0 18px 40px -16px rgba(0,0,0,.7);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
 html{scroll-behavior:smooth; scroll-padding-top:90px}
 body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; -webkit-font-smoothing:antialiased}
 body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:50; background:var(--hero-a)}
@@ -259,6 +261,7 @@ footer a{color:var(--hero-ink)}
   .hero,.hero::before,.hero::after,.hero .eyebrow::before{animation:none}
   .card,.reg-item,.method-card,.hero-meta div,nav.tabs a,.chip,.copy-btn{transition:none}
 }
+.tag.mine{background:var(--sun);color:#1a1033}
 </style>
 </head>
 <body>
@@ -421,6 +424,7 @@ footer a{color:var(--hero-ink)}
       <li><strong>Fréquence conseillée.</strong> Un passage hebdomadaire sur les sources réglementaires (Commission européenne, CNIL, ministère) et mensuel sur les sources de recherche (UNESCO, IFé, OCDE), qui publient moins souvent mais en profondeur.</li>
       <li><strong>Vérification de primauté.</strong> Toujours remonter au document ou à la page institutionnelle d'origine avant de citer un chiffre, une date ou une obligation légale — les relais (presse, syndicats, cabinets de conseil) peuvent être utiles pour l'analyse, mais jamais pour la source du fait.</li>
       <li><strong>Datation explicite.</strong> Les cadres cités ici évoluent : le cadre d'usage de l'IA en éducation (juin 2025) fait l'objet d'une actualisation pilotée par la CREIA, et le calendrier de l'AI Act a déjà été révisé une fois par le règlement dit « Omnibus » (juillet 2026). Vérifier la date de dernière modification affichée sur chaque page officielle.</li>
+      <li><strong>Sources ajoutées par Luc Masson.</strong> Des sources complémentaires peuvent être ajoutées depuis l'<a href="sources.html">espace d'ajout de sources</a> ; elles apparaissent dans les sections 2 et 3 avec la mention « ajoutée par Luc » et sont vérifiées chaque lundi avec les autres.</li>
       <li><strong>Limites du présent outil.</strong> Cette page est une carte des sources, pas une agrégation automatique de leur contenu : elle n'interroge aucune de ces sources en direct et doit être recroisée avec les pages d'origine, dont les contenus peuvent avoir changé depuis la dernière vérification indiquée en en-tête.</li>
     </ol>
   </div>
@@ -800,6 +804,36 @@ footer a{color:var(--hero-ink)}
   function spy(){var y=window.scrollY+120,cur=-1;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top+window.scrollY<=y)cur=i});
     links.forEach(function(a,i){a.classList.toggle('on',i===cur)})}
   window.addEventListener('scroll',spy,{passive:true});spy();
+})();
+</script>
+
+<script>
+/* Sources ajoutées par Luc Masson (fichier sources-perso.json) */
+(function(){
+  var LAB={fr:'France',eu:'UE',unesco:'UNESCO',franco:'Francophonie',recherche:'Recherche'};
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function bump(sel,n){var e=document.querySelector(sel);if(!e)return;var m=/(\d+)/.exec(e.textContent);if(m)e.textContent=e.textContent.replace(m[1],String(parseInt(m[1],10)+n))}
+  fetch('sources-perso.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+    var list=(d&&d.sources)||[], added={generale:0,education:0};
+    list.forEach(function(x){
+      if(!x||!/^https?:\/\//.test(x.url||''))return;
+      var sec=x.section==='generale'?'generale':'education', tag=LAB[x.tag]?x.tag:'recherche';
+      var grid=document.getElementById('grid-'+sec);if(!grid)return;
+      var c=el('div','card');c.setAttribute('data-tag',tag);
+      var t=el('div','card-tags');t.appendChild(el('span','tag '+tag,LAB[tag]));t.appendChild(el('span','tag mine','ajoutée par Luc'));c.appendChild(t);
+      c.appendChild(el('h3',null,x.nom||x.url));c.appendChild(el('p',null,x.desc||''));
+      var f=el('div','card-foot');f.appendChild(el('span','freq',x.freq||'À vérifier'));
+      var a=el('a',null,'Consulter →');a.href=x.url;a.target='_blank';a.rel='noopener';f.appendChild(a);c.appendChild(f);
+      var active=document.querySelector('.chips[data-group="'+sec+'"] .chip.active');
+      var flt=active?active.getAttribute('data-filter'):'all';if(flt!=='all'&&flt!==tag)c.hidden=true;
+      grid.appendChild(c);added[sec]++;
+    });
+    if(added.generale)bump('#ia-generale .count',added.generale);
+    if(added.education)bump('#ia-education .count',added.education);
+    var tot=added.generale+added.education;
+    if(tot){var hs=[].slice.call(document.querySelectorAll('.hero-meta div')).filter(function(dv){return /sources référencées/.test(dv.textContent)})[0];if(hs)bump2(hs.querySelector('strong'),tot)}
+    function bump2(e,n){if(e){var v=parseInt(e.textContent,10);if(!isNaN(v))e.textContent=String(v+n)}}
+  }).catch(function(){});
 })();
 </script>
 </body>
