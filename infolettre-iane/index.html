@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Observatoire mensuel du numérique éducatif et de l'IA pour l'infolettre des professeurs d'économie-gestion de l'académie de Lille.">
+<title>Info lettre IANE Académie de Lille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : en-tête d'identité, index collant, sections numérotées façon plan de cours, cartes uniquement pour les éléments copiables */
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --ink:#15233d; --muted:#55627a; --line:#d9dfe9;
+  --accent:#0d6e6a; --accent-soft:#e2f1ef; --navy:#1d3a6b; --warn:#9a5b00; --warn-soft:#fbf1df;
+  --c1:#2456a6; --c1s:#e4ecfa; --c2:#0d6e6a; --c2s:#dff1ee; --c3:#b4530a; --c3s:#fcebdc; --c4:#7a3fa0; --c4s:#f1e6f8;
+  --f-display:"Familjen Grotesk","Segoe UI",system-ui,sans-serif;
+  --f-body:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#16202f; --ink:#e7ecf4; --muted:#9aa7bb; --line:#2a3850;
+  --accent:#4fc2b8; --accent-soft:#163533; --navy:#9db8e8; --warn:#e8b25c; --warn-soft:#33281a; --c1:#8fb2f0; --c1s:#1b2a45; --c2:#4fc2b8; --c2s:#163533; --c3:#f0a35e; --c3s:#3a2614; --c4:#c79be6; --c4s:#2e2140; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#16202f; --ink:#e7ecf4; --muted:#9aa7bb; --line:#2a3850;
+  --accent:#4fc2b8; --accent-soft:#163533; --navy:#9db8e8; --warn:#e8b25c; --warn-soft:#33281a; --c1:#8fb2f0; --c1s:#1b2a45; --c2:#4fc2b8; --c2s:#163533; --c3:#f0a35e; --c3s:#3a2614; --c4:#c79be6; --c4s:#2e2140; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+header.top{padding-block:40px 28px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(32px,5vw,52px);font-weight:700;color:var(--navy);margin-top:8px}
+h1 span{color:var(--accent)}
+.lead{max-width:62ch;color:var(--muted);margin:12px 0 0}
+.who{font-family:var(--f-display);font-size:15px;border-left:3px solid var(--accent);padding-left:14px;min-width:0}
+.who strong{display:block;font-size:18px}
+.who span{display:block;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-top:16px}
+.meta b{color:var(--ink);font-weight:500}
+nav.index{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;overflow-x:auto}
+nav.index ol{list-style:none;display:flex;gap:6px;margin:0;padding:0;white-space:nowrap}
+nav.index a{display:block;font-family:var(--f-display);font-size:14px;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:6px}
+nav.index a:hover{background:var(--accent-soft);color:var(--ink)}
+nav.index a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+section{padding-block:44px 8px;scroll-margin-top:64px}
+.sh{display:flex;gap:14px;align-items:baseline;margin-bottom:14px}
+.num{font-family:var(--f-mono);font-size:15px;color:var(--accent);font-weight:500}
+h2{font-size:clamp(24px,3.4vw,32px);font-weight:600}
+h3{font-size:19px;font-weight:600;margin:28px 0 10px;color:var(--navy)}
+h3 .num{font-size:13px;margin-right:8px}
+.intro{max-width:66ch;color:var(--muted);margin:0 0 8px}
+ul.items{list-style:none;padding:0;margin:0;display:grid;gap:0}
+ul.items li{padding:14px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:120px 1fr;gap:6px 18px}
+ul.items li:last-child{border-bottom:1px solid var(--line)}
+.tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:var(--muted);padding-top:4px}
+.tag b{display:block;color:var(--accent);font-weight:500;text-transform:uppercase}
+.it{min-width:0}
+.it strong{font-family:var(--f-display);font-size:17px;display:block;line-height:1.3}
+.it p{margin:4px 0 0;max-width:68ch}
+.it .src{font-family:var(--f-mono);font-size:12.5px;margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 14px}
+.pill{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:2px}
+.pill.ok{background:var(--accent-soft);color:var(--accent)}
+.pill.chk{background:var(--warn-soft);color:var(--warn)}
+.pill.date{background:var(--warn-soft);color:var(--warn)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.col h3{margin-top:12px}
+.col ul{padding-left:18px;margin:0}
+.col li{margin:6px 0}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-display);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.fam{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-top:16px}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.card-h h3{margin:0}
+button.copy{font-family:var(--f-display);font-size:14px;font-weight:600;background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:8px 14px;cursor:pointer}
+button.copy:hover{filter:brightness(1.08)}
+pre.copytxt{white-space:pre-wrap;font-family:var(--f-mono);font-size:13.5px;line-height:1.55;margin:0;max-height:440px;overflow:auto;background:var(--bg);border-radius:6px;padding:14px;border:1px solid var(--line)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:12px;max-width:72ch}
+.steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:10px}
+.steps li::before{content:counter(s);font-family:var(--f-mono);color:var(--accent);font-weight:500}
+.note{background:var(--warn-soft);border-radius:8px;padding:12px 16px;font-size:16px;max-width:72ch;margin-top:16px}
+footer{margin-top:56px;padding-block:24px 40px;border-top:1px solid var(--line);font-family:var(--f-mono);font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (max-width:820px){.grid3{grid-template-columns:1fr}header.top{grid-template-columns:1fr}}
+@media (max-width:560px){body{font-size:17px}ul.items li{grid-template-columns:1fr}.tag b{display:inline;margin-right:8px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-behavior:smooth}
+
+section{--rc:var(--accent);--rcs:var(--accent-soft)}
+#actualites{--rc:var(--c1);--rcs:var(--c1s)}
+#diplomes{--rc:var(--c2);--rcs:var(--c2s)}
+#agenda{--rc:var(--c3);--rcs:var(--c3s)}
+#agent{--rc:var(--c4);--rcs:var(--c4s)}
+.sh .num{color:var(--rc)}
+.sh .big{font-size:28px;line-height:1;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:var(--rcs);flex:none;align-self:center}
+section h3{color:var(--rc)}
+.tag b{color:var(--rc)}
+ul.items li{grid-template-columns:112px 44px 1fr!important}
+.pic{width:42px;height:42px;border-radius:50%;background:var(--rcs);display:grid;place-items:center;font-size:21px;line-height:1}
+ul.items li:hover .pic{transform:scale(1.08)}
+.pic{transition:transform .2s}
+@media (max-width:560px){ul.items li{grid-template-columns:44px 1fr!important}ul.items li .tag{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){.pic{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <div class="eyebrow">Observatoire du numérique éducatif et de l'IA · Économie-gestion</div>
+    <h1>Info lettre <span>IANE</span><br>Académie de Lille</h1>
+    <p class="lead">La base de veille mensuelle pour préparer l'infolettre destinée aux 1 142 professeurs d'économie-gestion de l'académie : sources officielles vérifiées, faits datés, brouillon prêt à relire.</p>
+    <div class="meta"><span>Édition préparée : <b>n°1 · novembre 2026</b></span><span>Dernière vérification : <b>22 octobre 2026</b></span><span>Rythme : <b>mensuel</b></span></div>
+  </div>
+  <div class="who">
+    <strong>Luc Masson</strong>
+    <span>IA référent, Académie de Lille</span>
+    <span>Interlocuteur académique au numérique éducatif</span>
+  </div>
+</header>
+</div>
+
+<nav class="index" aria-label="Index">
+  <div class="wrap"><ol>
+    <li><a href="#cadre">1. Cadre</a></li>
+    <li><a href="#actualites">2. Actualités institutionnelles</a></li>
+    <li><a href="#diplomes">3. Ressources par diplôme</a></li>
+    <li><a href="#agenda">4. Agenda et formations</a></li>
+    <li><a href="#sources">5. Répertoire des sources</a></li>
+    <li><a href="#brouillon">6. Brouillon de l'infolettre</a></li>
+    <li><a href="#agent">7. Agent de veille</a></li>
+    <li><a href="#methode">8. Méthode mensuelle</a></li>
+  </ol></div>
+</nav>
+
+<main class="wrap">
+
+<section id="cadre">
+  <div class="sh"><span class="big" aria-hidden="true">🧭</span><span class="num">1</span><h2>Cadre de l'observatoire</h2></div>
+  <p class="intro">Cet observatoire ne retient que des sources publiques et officielles : ministère, éduscol, réseaux nationaux de ressources en économie-gestion, services académiques, institutions françaises et européennes. Chaque fait porte sa source et sa date.</p>
+  <div class="grid3">
+    <div class="col"><h3><span class="num">1.1</span>Public visé</h3><ul><li>Professeurs d'économie-gestion de l'académie de Lille</li><li>Voie professionnelle, STMG et BTS tertiaires</li><li>1 142 destinataires</li></ul></div>
+    <div class="col"><h3><span class="num">1.2</span>Trois rubriques</h3><ul><li>Actualités institutionnelles</li><li>Ressources par diplôme</li><li>Agenda et formations</li></ul></div>
+    <div class="col"><h3><span class="num">1.3</span>Statut des liens</h3><ul><li><span class="pill ok">vérifié</span> lu et daté le 22/10/2026</li><li><span class="pill chk">à confirmer</span> institution officielle, page exacte à vérifier</li><li><span class="pill date">échéance</span> date limite à rappeler</li></ul></div>
+  </div>
+</section>
+
+<section id="actualites">
+  <div class="sh"><span class="big" aria-hidden="true">🏛️</span><span class="num">2</span><h2>Actualités institutionnelles</h2></div>
+  <p class="intro">Textes, cadres et décisions qui touchent l'IA et le numérique éducatif, avec leur lien à l'enseignement de l'économie-gestion.</p>
+
+  <h3><span class="num">2.1</span>Éducation nationale</h3>
+  <ul class="items">
+    <li><div class="tag"><b>Pix IA</b>Rentrée 2026</div><div class="pic" aria-hidden="true">🧠</div><div class="it"><strong>Le parcours Pix IA est obligatoire depuis la rentrée 2026 <span class="pill ok">vérifié</span></strong><p>Il concerne tous les élèves de 4e, de 2nde générale et de 1re année de CAP, et reste ouvert aux volontaires. Il porte sur le fonctionnement des IA génératives, la formulation de requêtes et la gestion des données personnelles.</p><div class="src"><a href="https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education" target="_blank" rel="noopener">éduscol · IA et usages en éducation</a></div></div></li>
+    <li><div class="tag"><b>Cadre</b>Mis à jour juil. 2026</div><div class="pic" aria-hidden="true">📜</div><div class="it"><strong>Le cadre d'usage de l'IA en éducation <span class="pill ok">vérifié</span></strong><p>IA générative autorisée en classe à partir de la 4e, de façon encadrée ; usage autonome au lycée dans un cadre défini par l'enseignant. Il privilégie un usage frugal et les solutions libres.</p><div class="src"><a href="https://www.education.gouv.fr/media/227697/download" target="_blank" rel="noopener">Télécharger le cadre d'usage</a><a href="https://eduscol.education.gouv.fr/sites/default/files/document/affichecadre-usage-iapdf-113376.pdf" target="_blank" rel="noopener">Affiche (PDF)</a></div></div></li>
+    <li><div class="tag"><b>Observatoire</b>Mai 2026</div><div class="pic" aria-hidden="true">🔭</div><div class="it"><strong>L'Observatoire national des pratiques pédagogiques avec l'IA recense les projets des académies <span class="pill ok">vérifié</span></strong><p>Les enseignants peuvent déclarer une action innovante ou une ressource. La DRANE, la CARDIE et l'EAFC valident les projets en académie. Bon appel à contributions pour vos collègues.</p><div class="src"><a href="https://eduscol.education.gouv.fr/6884/observatoire-national-des-pratiques-pedagogiques-avec-l-intelligence-artificielle" target="_blank" rel="noopener">éduscol · Observatoire national</a><a href="https://grist.numerique.gouv.fr/o/observatoire-pratiques-ia-pedagogie/forms/mc1tYpj9TmHooWBuKL6fYJ/217" target="_blank" rel="noopener">Déclarer une action</a></div></div></li>
+    <li><div class="tag"><b>Droit d'auteur</b>Juil. 2026</div><div class="pic" aria-hidden="true">©️</div><div class="it"><strong>Guide éduscol du droit d'auteur, avec un volet sur l'IA <span class="pill ok">vérifié</span></strong><p>Mis à jour en juillet 2026 : exception pédagogique, œuvres des élèves, droit à l'image et IA. Utile pour la communication et le marketing en BTS.</p><div class="src"><a href="https://eduscol.education.gouv.fr/6270/comment-utiliser-des-oeuvres-en-contexte-pedagogique-dans-le-respect-du-droit-d-auteur" target="_blank" rel="noopener">éduscol · droit d'auteur</a></div></div></li>
+  </ul>
+
+  <h3><span class="num">2.2</span>Régulation de l'IA</h3>
+  <ul class="items">
+    <li><div class="tag"><b>UE</b>17 sept. 2026</div><div class="pic" aria-hidden="true">🇪🇺</div><div class="it"><strong>EU Kids Act : la Commission propose un règlement sur la protection des mineurs en ligne <span class="pill ok">vérifié</span></strong><p>Il vise réseaux sociaux, partage de vidéos, jeux en ligne, compagnons IA et agents conversationnels, avec un accès aux médias sociaux interdit avant 13 ans. Ce n'est encore qu'une proposition, à adopter par le Parlement et le Conseil. Support direct pour la CEJM et l'économie-droit.</p><div class="src"><a href="https://commission.europa.eu/news-and-media/news/eu-kids-act-helping-children-navigate-safer-online-world-2026-09-17_fr" target="_blank" rel="noopener">Commission européenne</a></div></div></li>
+    <li><div class="tag"><b>France</b>Fév. 2026</div><div class="pic" aria-hidden="true">🛡️</div><div class="it"><strong>Feuille de route 2026-2027 de l'INESIA <span class="pill ok">vérifié</span></strong><p>L'institut national pour l'évaluation et la sécurité de l'IA (DGE et SGDSN) réunit ANSSI, Inria, LNE et PEReN. Trois pôles : appui à la régulation, risques systémiques, performance et fiabilité.</p><div class="src"><a href="https://www.entreprises.gouv.fr/espace-presse/linstitut-national-pour-levaluation-et-la-securite-de-lia-adopte-sa-feuille-de-route" target="_blank" rel="noopener">DGE · INESIA</a></div></div></li>
+    <li><div class="tag"><b>Frugalité</b>Référentiel</div><div class="pic" aria-hidden="true">🌱</div><div class="it"><strong>IA frugale : le référentiel de l'Ecolab et de l'Afnor <span class="pill ok">vérifié</span></strong><p>Il aide à démontrer qu'une IA est vraiment nécessaire avant d'y recourir. Il fait écho au principe d'usage frugal du cadre d'usage ministériel.</p><div class="src"><a href="https://www.ecologie.gouv.fr/presse/publication-du-referentiel-general-lia-frugale-sattaquer-limpact-environnemental-lia" target="_blank" rel="noopener">Ministère de la Transition écologique · référentiel</a></div></div></li>
+    <li><div class="tag"><b>Géopolitique</b>Oct. 2026</div><div class="pic" aria-hidden="true">🌍</div><div class="it"><strong>Dépendances stratégiques de l'IA (veille éduscol d'octobre) <span class="pill ok">vérifié</span></strong><p>Concentration de la puissance de calcul : les États-Unis en détiennent 86 %, la France moins de 1 %. Matière pour l'économie et le management en STMG et BTS.</p><div class="src"><a href="https://eduscol.education.gouv.fr/6684/veille-education-numerique-2026-2027" target="_blank" rel="noopener">éduscol · Veille éducation numérique</a></div></div></li>
+  </ul>
+</section>
+
+<section id="diplomes">
+  <div class="sh"><span class="big" aria-hidden="true">🎓</span><span class="num">3</span><h2>Ressources par diplôme</h2></div>
+  <p class="intro">Données et ressources à exploiter en classe, classées par public. Les centres nationaux de ressources sont listés en section 5.</p>
+
+  <h3><span class="num">3.1</span>BTS tertiaires (NDRC, MCO, GPME, SAM, CG…)</h3>
+  <ul class="items">
+    <li><div class="tag"><b>Données</b>28 sept. 2026</div><div class="pic" aria-hidden="true">📊</div><div class="it"><strong>Baromètre France Num 2026 : 40 % des TPE-PME utilisent l'IA <span class="pill ok">vérifié</span></strong><p>+14 points en un an ; usages principaux : génération de contenus (34 %) et chatbots (24 %). Échantillon de 9 655 entreprises. Idéal pour la relation client digitalisée, l'étude de marché et la CEJM.</p><div class="src"><a href="https://entreprendre.service-public.gouv.fr/actualites/A19079" target="_blank" rel="noopener">Entreprendre Service Public</a><a href="https://www.entreprises.gouv.fr/espace-presse/barometre-france-num-2026-quatre-tpe-pme-sur-dix-utilisent-desormais-lintelligence" target="_blank" rel="noopener">DGE · communiqué</a></div></div></li>
+    <li><div class="tag"><b>Travail</b>2026</div><div class="pic" aria-hidden="true">💼</div><div class="it"><strong>Banque de France : l'IA s'installe dans les entreprises françaises <span class="pill ok">vérifié</span></strong><p>Publication sur la diffusion de l'IA dans les entreprises et ses effets sur la productivité. Pour la CEJM et le management.</p><div class="src"><a href="https://www.banque-france.fr/fr/publications-et-statistiques/publications/lia-sinstalle-dans-les-entreprises-francaises-une-diffusion-rapide-mais-des-gains-de-productivite" target="_blank" rel="noopener">Banque de France · publication</a></div></div></li>
+  </ul>
+
+  <h3><span class="num">3.2</span>Série STMG</h3>
+  <ul class="items">
+    <li><div class="tag"><b>Concours</b>Terminale</div><div class="pic" aria-hidden="true">🏆</div><div class="it"><strong>Prix de l'excellence économique en STMG <span class="pill date">jusqu'au 6 nov.</span></strong><p>Ouvert à tous les élèves de terminale STMG, quel que soit leur niveau. Inscriptions jusqu'au 6 novembre 2026, 18 h.</p><div class="src"><a href="https://www.banque-france.fr/fr/prix-de-lexcellence-economique-en-stmg-2026-2027" target="_blank" rel="noopener">Banque de France</a></div></div></li>
+    <li><div class="tag"><b>Programmes</b>éduscol</div><div class="pic" aria-hidden="true">📘</div><div class="it"><strong>Programmes et ressources en série STMG <span class="pill ok">vérifié</span></strong><p>Management, sciences de gestion et numérique, droit et économie.</p><div class="src"><a href="https://eduscol.education.gouv.fr/5862/programmes-et-ressources-en-serie-stmg" target="_blank" rel="noopener">éduscol · STMG</a></div></div></li>
+  </ul>
+
+  <h3><span class="num">3.3</span>Voie professionnelle</h3>
+  <ul class="items">
+    <li><div class="tag"><b>Programmes</b>éduscol</div><div class="pic" aria-hidden="true">📗</div><div class="it"><strong>Économie-gestion et économie-droit en baccalauréat professionnel <span class="pill ok">vérifié</span></strong><p>Programmes et ressources d'accompagnement.</p><div class="src"><a href="https://eduscol.education.gouv.fr/5877/programmes-et-ressources-en-economie-gestion-voie-professionnelle" target="_blank" rel="noopener">Économie-gestion</a><a href="https://eduscol.education.gouv.fr/5874/programmes-et-ressources-en-economie-droit-voie-professionnelle" target="_blank" rel="noopener">Économie-droit</a></div></div></li>
+    <li><div class="tag"><b>Pix IA</b>1re CAP</div><div class="pic" aria-hidden="true">🧠</div><div class="it"><strong>Pix IA en première année de CAP <span class="pill ok">vérifié</span></strong><p>Obligatoire depuis la rentrée 2026 : à anticiper dans la progression des équipes de CAP.</p><div class="src"><a href="https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education" target="_blank" rel="noopener">éduscol</a></div></div></li>
+  </ul>
+</section>
+
+<section id="agenda">
+  <div class="sh"><span class="big" aria-hidden="true">📅</span><span class="num">4</span><h2>Agenda et formations</h2></div>
+  <ul class="items">
+    <li><div class="tag"><b>6 nov. 2026</b>18 h</div><div class="pic" aria-hidden="true">⏰</div><div class="it"><strong>Clôture des inscriptions au Prix de l'excellence économique en STMG <span class="pill date">échéance</span></strong><div class="src"><a href="https://www.banque-france.fr/fr/prix-de-lexcellence-economique-en-stmg-2026-2027" target="_blank" rel="noopener">Banque de France</a></div></div></li>
+    <li><div class="tag"><b>2026-2027</b>Webinaires PNF</div><div class="pic" aria-hidden="true">💶</div><div class="it"><strong>Conférences d'éducation financière EDUCFI <span class="pill ok">vérifié</span></strong><p>Banque de France et La Finance pour tous. La première a eu lieu le 15 octobre (crises économiques et financières) ; les replays sont sur PodEduc.</p><div class="src"><a href="https://eduscol.education.gouv.fr/sites/default/files/document/educfi-conferences-d-education-financiere-113586.pdf" target="_blank" rel="noopener">Programme 2026-2027 (PDF)</a><a href="https://podeduc.apps.education.fr/dgesco-formation/conferences-sur-des-thematiques-economiques-educfi/" target="_blank" rel="noopener">Replays PodEduc</a></div></div></li>
+    <li><div class="tag"><b>Permanent</b>Magistère</div><div class="pic" aria-hidden="true">👥</div><div class="it"><strong>Communauté CREIA et parcours « Utiliser l'IA générative de façon éclairée » <span class="pill ok">vérifié</span></strong><p>Communauté entre pairs ouverte en auto-inscription, avec agenda partagé de webinaires.</p><div class="src"><a href="https://partage02.magistere.apps.education.fr/course/section.php?id=1463" target="_blank" rel="noopener">CREIA</a><a href="https://partage02.magistere.apps.education.fr/course/view.php?id=625" target="_blank" rel="noopener">Parcours Magistère</a></div></div></li>
+    <li><div class="tag"><b>1 heure</b>Mentor</div><div class="pic" aria-hidden="true">💻</div><div class="it"><strong>Module d'initiation « Découvrir les IA génératives » <span class="pill ok">vérifié</span></strong><div class="src"><a href="https://mentor.gouv.fr/local/catalog/pages/training.php?trainingid=3189" target="_blank" rel="noopener">Plateforme Mentor</a></div></div></li>
+    <li><div class="tag"><b>Libre accès</b>4 MOOC</div><div class="pic" aria-hidden="true">♻️</div><div class="it"><strong>Académie du numérique responsable (INR), dont un cours sur l'éthique et la gouvernance de l'IA <span class="pill ok">vérifié</span></strong><div class="src"><a href="https://www.academie-nr.org/index.html" target="_blank" rel="noopener">academie-nr.org</a></div></div></li>
+    <li><div class="tag"><b>Académie</b>DRANE Lille</div><div class="pic" aria-hidden="true">🏫</div><div class="it"><strong>Rendez-vous numériques et formations de la DRANE <span class="pill chk">à confirmer</span></strong><p>Le site ne se lit pas automatiquement : à compléter chaque mois à partir de ses publications.</p><div class="src"><a href="https://dane.site.ac-lille.fr/" target="_blank" rel="noopener">dane.site.ac-lille.fr</a><a href="https://www1.ac-lille.fr/les-formations-de-proximite-124006" target="_blank" rel="noopener">Formations de proximité</a></div></div></li>
+  </ul>
+</section>
+
+<section id="sources">
+  <div class="sh"><span class="big" aria-hidden="true">📚</span><span class="num">5</span><h2>Répertoire des sources</h2></div>
+  <p class="intro">Les sources à consulter chaque mois, de la plus générale à la plus locale.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Famille</th><th>Source</th><th>Ce qu'on y trouve</th></tr></thead>
+    <tbody>
+      <tr><td class="fam">National</td><td><a href="https://eduscol.education.gouv.fr/4419/economie-et-gestion" target="_blank" rel="noopener">éduscol · Économie et gestion</a></td><td>Actualités de la discipline, concours, programmes</td></tr>
+      <tr><td class="fam">National</td><td><a href="https://eduscol.education.gouv.fr/6699/les-lettres-d-actualite-edunum-sur-le-numerique-educatif#EconomieGestion" target="_blank" rel="noopener">Lettres ÉduNum économie-gestion</a></td><td>Usages numériques disciplinaires (n°64, avril 2026)</td></tr>
+      <tr><td class="fam">National</td><td><a href="https://eduscol.education.gouv.fr/6684/veille-education-numerique-2026-2027" target="_blank" rel="noopener">Veille éducation numérique</a></td><td>Bulletin mensuel IA et numérique éducatif</td></tr>
+      <tr><td class="fam">National</td><td><a href="https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education" target="_blank" rel="noopener">éduscol · IA en éducation</a></td><td>Cadre d'usage, Pix IA, formations, scénarios Édubase</td></tr>
+      <tr><td class="fam">Réseau</td><td><a href="https://j4.cerpeg.fr/" target="_blank" rel="noopener">CERPEG</a></td><td>Enseignement professionnel en économie-gestion</td></tr>
+      <tr><td class="fam">Réseau</td><td><a href="https://crcom.ac-versailles.fr/" target="_blank" rel="noopener">CRCOM</a></td><td>Sciences de gestion, management, droit, économie</td></tr>
+      <tr><td class="fam">Réseau</td><td><a href="https://www.crcf-edu.fr/" target="_blank" rel="noopener">CRCF</a></td><td>Finance, comptabilité, professions réglementées</td></tr>
+      <tr><td class="fam">Réseau</td><td><a href="https://www.reseaucerta.org/" target="_blank" rel="noopener">CERTA</a></td><td>Informatique et systèmes d'information</td></tr>
+      <tr><td class="fam">Réseau</td><td><a href="http://crcm-tl.fr/" target="_blank" rel="noopener">CRCM-TL</a></td><td>Marketing, transport, logistique, sécurité</td></tr>
+      <tr><td class="fam">Académie</td><td><a href="https://dane.site.ac-lille.fr/" target="_blank" rel="noopener">DRANE Lille</a></td><td>Formations numériques, ENT, rendez-vous du numérique</td></tr>
+      <tr><td class="fam">Académie</td><td><a href="https://pedagogie.ac-lille.fr/ecogestionlp/" target="_blank" rel="noopener">Économie-gestion LP Lille</a></td><td>Actualités des IEN, voie professionnelle</td></tr>
+      <tr><td class="fam">Économie</td><td><a href="https://www.entreprises.gouv.fr/" target="_blank" rel="noopener">DGE · France Num, INESIA</a></td><td>Données entreprises et numérique, IA de confiance</td></tr>
+      <tr><td class="fam">Économie</td><td><a href="https://www.banque-france.fr/fr" target="_blank" rel="noopener">Banque de France</a></td><td>EDUCFI, études sur le travail et l'IA</td></tr>
+      <tr><td class="fam">Économie</td><td><a href="https://www.ccomptes.fr/" target="_blank" rel="noopener">Cour des comptes</a></td><td>Rapports, outil « Qu'en dit la Cour ? » <span class="pill chk">à confirmer</span></td></tr>
+      <tr><td class="fam">Europe</td><td><a href="https://commission.europa.eu/" target="_blank" rel="noopener">Commission européenne</a></td><td>AI Act, EU Kids Act</td></tr>
+      <tr><td class="fam">Outils</td><td><a href="https://lasuite.numerique.gouv.fr/" target="_blank" rel="noopener">LaSuite numérique (DINUM)</a></td><td>Outils collaboratifs de l'État <span class="pill chk">à confirmer</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="brouillon">
+  <div class="sh"><span class="big" aria-hidden="true">✉️</span><span class="num">6</span><h2>Brouillon de l'infolettre n°1</h2></div>
+  <p class="intro">Texte prêt à relire, à coller dans votre outil de diffusion. Les faits sont tirés des sections 2 à 4.</p>
+  <div class="card">
+    <div class="card-h"><h3>Infolettre IANE · novembre 2026</h3><button class="copy" type="button" data-target="nl1">Copier le texte</button></div>
+<pre class="copytxt" id="nl1">✨ INFO LETTRE IANE ✨
+Économie-gestion · Académie de Lille
+N°1 · Novembre 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👋 Chères et chers collègues,
+
+Bienvenue dans la première infolettre consacrée au numérique éducatif et à l'IA en économie-gestion ! Chaque mois, l'essentiel en 3 rubriques et 5 minutes de lecture.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏛️ 1. ACTUALITÉS INSTITUTIONNELLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧠 1.1. Pix IA devient obligatoire
+Depuis la rentrée 2026, tous les élèves de 4e, de 2nde générale et de 1re année de CAP suivent le parcours Pix IA : fonctionnement des IA génératives, requêtes efficaces, protection des données.
+👉 https://eduscol.education.gouv.fr/6702/les-intelligences-artificielles-et-leurs-usages-en-education
+
+📜 1.2. Le cadre d'usage de l'IA, en un coup d'œil
+IA générative en classe dès la 4e, de façon encadrée ; en autonomie au lycée dans un cadre fixé par l'enseignant. Mots d'ordre : frugalité et solutions libres.
+👉 https://www.education.gouv.fr/media/227697/download
+
+🔭 1.3. Vos pratiques méritent d'être connues
+L'Observatoire national des pratiques pédagogiques avec l'IA recense les projets des académies. Déclarez une action ou une ressource en quelques minutes !
+👉 https://eduscol.education.gouv.fr/6884/observatoire-national-des-pratiques-pedagogiques-avec-l-intelligence-artificielle
+
+🇪🇺 1.4. EU Kids Act : l'Europe veut protéger les mineurs en ligne
+Proposé le 17 septembre 2026 : réseaux sociaux, jeux, compagnons IA et chatbots dans le viseur. Un cas d'actualité tout trouvé pour la CEJM et l'économie-droit.
+👉 https://commission.europa.eu/news-and-media/news/eu-kids-act-helping-children-navigate-safer-online-world-2026-09-17_fr
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎓 2. RESSOURCES PAR DIPLÔME
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 2.1. BTS tertiaires — 4 TPE-PME sur 10 utilisent l'IA
+Le baromètre France Num 2026 le confirme : +14 points en un an, surtout pour créer des contenus et des chatbots. Des chiffres prêts à exploiter en relation client, marketing et CEJM.
+👉 https://entreprendre.service-public.gouv.fr/actualites/A19079
+
+🏆 2.2. STMG — Prix de l'excellence économique
+Ouvert à tous les élèves de terminale, quel que soit leur niveau. ⏰ Inscriptions jusqu'au 6 novembre 2026, 18 h.
+👉 https://www.banque-france.fr/fr/prix-de-lexcellence-economique-en-stmg-2026-2027
+
+🧠 2.3. Voie professionnelle — Pix IA en 1re année de CAP
+À glisser dans la progression des équipes dès cette année.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📅 3. AGENDA ET FORMATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏰ 3.1. 6 novembre — dernier jour pour inscrire vos terminales STMG au Prix de l'excellence économique.
+
+💶 3.2. Conférences EDUCFI 2026-2027 (Banque de France, La Finance pour tous) : les replays sont sur PodEduc.
+👉 https://podeduc.apps.education.fr/dgesco-formation/conferences-sur-des-thematiques-economiques-educfi/
+
+👥 3.3. Se former à l'IA : rejoignez la communauté CREIA et le parcours Magistère « Utiliser l'IA générative de façon éclairée et responsable ».
+👉 https://partage02.magistere.apps.education.fr/course/view.php?id=625
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 Une pratique à partager, une question ? Répondez simplement à ce message.
+
+Bonne lecture et au mois prochain !
+
+Luc Masson
+IA référent · Interlocuteur académique au numérique éducatif
+Académie de Lille</pre>
+  </div>
+</section>
+
+<section id="agent">
+  <div class="sh"><span class="big" aria-hidden="true">🤖</span><span class="num">7</span><h2>Agent de veille</h2></div>
+  <p class="intro">Deux gabarits à coller dans un assistant IA pour préparer l'édition suivante.</p>
+  <div class="card">
+    <div class="card-h"><h3><span class="num">7.1</span>Collecte mensuelle</h3><button class="copy" type="button" data-target="p1">Copier</button></div>
+<pre class="copytxt" id="p1">Tu es un assistant de veille pour l'infolettre IANE (économie-gestion, académie de Lille).
+Période : du [JJ/MM] au [JJ/MM].
+Consulte uniquement des sources officielles : éduscol (économie-gestion, veille éducation numérique, IA en éducation, lettres ÉduNum), education.gouv.fr, CERPEG, CRCOM, CRCF, CERTA, CRCM-TL, DRANE Lille, DGE / France Num, Banque de France, Commission européenne, CNIL.
+Pour chaque information : titre, date de publication, source et lien, résumé en 2 phrases, rubrique (Actualités institutionnelles / Ressources par diplôme / Agenda et formations), diplômes concernés (BTS, STMG, bac pro, CAP).
+Écarte les blogs, médias commerciaux et contenus sans date. Signale tout lien que tu n'as pas pu ouvrir.</pre>
+  </div>
+  <div class="card">
+    <div class="card-h"><h3><span class="num">7.2</span>Rédaction de l'infolettre</h3><button class="copy" type="button" data-target="p2">Copier</button></div>
+<pre class="copytxt" id="p2">À partir des informations vérifiées ci-dessous, rédige l'infolettre IANE n°[X] pour 1 142 professeurs d'économie-gestion.
+Structure numérotée : 1. Actualités institutionnelles, 2. Ressources par diplôme, 3. Agenda et formations.
+Pour chaque entrée : un titre court, 2 phrases maximum, l'intérêt pour la classe, le lien.
+Ton professionnel et direct, sans jargon. Pas d'information sans source.
+Signature : Luc Masson, IA référent — Interlocuteur académique au numérique éducatif, Académie de Lille.
+[Coller ici les informations vérifiées]</pre>
+  </div>
+</section>
+
+<section id="methode">
+  <div class="sh"><span class="big" aria-hidden="true">🔁</span><span class="num">8</span><h2>Méthode mensuelle</h2></div>
+  <ol class="steps">
+    <li><span><strong>Vers le 20 du mois :</strong> mise à jour automatique de cet observatoire et préparation du brouillon suivant.</span></li>
+    <li><span><strong>Relecture :</strong> vérifier les éléments marqués « à confirmer » et compléter avec les actualités de la DRANE et du site académique.</span></li>
+    <li><span><strong>Ajouts personnels :</strong> intégrer les informations reçues par d'autres canaux (infolettres officielles, réunions IEN).</span></li>
+    <li><span><strong>Diffusion :</strong> copier le brouillon validé dans l'outil d'envoi académique au début du mois suivant.</span></li>
+  </ol>
+  <p class="note">Les sites de la DRANE Lille et de l'économie-gestion LP n'autorisent pas la lecture automatique : leurs liens mènent à la page d'accueil, et leurs actualités sont à ajouter à la main. Les liens « à confirmer » (Cour des comptes, LaSuite) mènent aussi à l'accueil du site, faute de page dédiée trouvée.</p>
+</section>
+
+</main>
+
+<div class="wrap"><footer>
+  <span>Info lettre IANE · Académie de Lille · Luc Masson</span>
+  <span>Sources officielles · vérification du 22 octobre 2026</span>
+</footer></div>
+
+<script>
+document.querySelectorAll('button.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.target), t=el.textContent, label=b.textContent;
+    function done(msg){b.textContent=msg;setTimeout(function(){b.textContent=label},1800)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);done('Texte sélectionné')}
+    try{navigator.clipboard.writeText(t).then(function(){done('Copié')},fallback)}catch(e){fallback()}
+  });
+});
+var links=[].slice.call(document.querySelectorAll('nav.index a'));
+var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+function spy(){var y=window.scrollY+100,cur=0;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur)})}
+window.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+</body>
+</html>
