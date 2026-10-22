@@ -1,10 +1,11 @@
 # Veille hebdomadaire IA & éducation
-# Chaque lundi à 7 h 00 (heure de Paris en été, 6 h en hiver) + lancement manuel possible.
+# Lancement manuel uniquement (voir ci-dessous).
 name: Veille hebdomadaire IA & éducation
 
+# Exécution automatique désactivée le 22/10/2026 : la veille hebdomadaire est
+# désormais produite par une tâche planifiée Claude, sans clé API.
+# Le lancement manuel reste possible (nécessite le secret ANTHROPIC_API_KEY).
 on:
-  schedule:
-    - cron: "0 5 * * 1"      # lundi 05:00 UTC
   workflow_dispatch: {}       # bouton « Run workflow » dans l'onglet Actions
 
 permissions:
