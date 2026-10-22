@@ -107,12 +107,20 @@ ul.items li:hover .pic{transform:scale(1.08)}
 .pic{transition:transform .2s}
 @media (max-width:560px){ul.items li{grid-template-columns:44px 1fr!important}ul.items li .tag{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){.pic{transition:none}}
+
+.back{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-display);font-weight:600;font-size:15px;text-decoration:none;color:var(--surface);background:var(--navy);padding:9px 16px;border-radius:999px;margin-bottom:18px}
+.back:hover{filter:brightness(1.15)}
+nav.index{overflow-x:visible}
+nav.index ol{flex-wrap:wrap;white-space:normal}
+nav.index a.home{background:var(--navy);color:var(--surface);font-weight:600}
+@media (max-width:560px){nav.index{position:static}nav.index a{font-size:13px;padding:5px 8px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
   <div>
+    <a class="back" href="https://infocomluc-svg.github.io/observatoire-ia-education/">← Retour à l'Observatoire IA Éducation</a>
     <div class="eyebrow">Observatoire du numérique éducatif et de l'IA · Économie-gestion</div>
     <h1>Info lettre <span>IANE</span><br>Académie de Lille</h1>
     <p class="lead">La base de veille mensuelle pour préparer l'infolettre destinée aux 1 142 professeurs d'économie-gestion de l'académie : sources officielles vérifiées, faits datés, brouillon prêt à relire.</p>
@@ -121,6 +129,7 @@ ul.items li:hover .pic{transform:scale(1.08)}
   <div class="who">
     <strong>Luc Masson</strong>
     <span>IA référent, Académie de Lille</span>
+    <span>Référent académique en numérique éducatif</span>
     <span>Interlocuteur académique au numérique éducatif</span>
   </div>
 </header>
@@ -128,6 +137,7 @@ ul.items li:hover .pic{transform:scale(1.08)}
 
 <nav class="index" aria-label="Index">
   <div class="wrap"><ol>
+    <li><a class="home" href="https://infocomluc-svg.github.io/observatoire-ia-education/">← Observatoire</a></li>
     <li><a href="#cadre">1. Cadre</a></li>
     <li><a href="#actualites">2. Actualités institutionnelles</a></li>
     <li><a href="#diplomes">3. Ressources par diplôme</a></li>
@@ -301,7 +311,7 @@ Ouvert à tous les élèves de terminale, quel que soit leur niveau. ⏰ Inscrip
 Bonne lecture et au mois prochain !
 
 Luc Masson
-IA référent · Interlocuteur académique au numérique éducatif
+IA référent · Référent en numérique éducatif · Interlocuteur académique au numérique éducatif
 Académie de Lille</pre>
   </div>
 </section>
@@ -323,7 +333,7 @@ Pour chaque information : titre, date de publication, source et lien, résumé e
 Structure numérotée : 1. Actualités institutionnelles, 2. Ressources par diplôme, 3. Agenda et formations.
 Pour chaque entrée : un titre court, 2 phrases maximum, l'intérêt pour la classe, le lien.
 Ton professionnel et direct, sans jargon. Pas d'information sans source.
-Signature : Luc Masson, IA référent — Interlocuteur académique au numérique éducatif, Académie de Lille.
+Signature : Luc Masson, IA référent — Référent en numérique éducatif — Interlocuteur académique au numérique éducatif, Académie de Lille.
 [Coller ici les informations vérifiées]</pre>
   </div>
 </section>
