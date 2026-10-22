@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Ajouter un sujet · Info lettre IANE</title>
+<title>Ajouts · Info lettre IANE</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Mise en page : formulaire en une colonne, liste des sujets à droite sur grand écran, étapes de publication numérotées en bas */
@@ -68,8 +68,8 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
 <body>
 <div class="wrap">
   <a class="back" href="./">← Retour à l'Info lettre IANE</a>
-  <h1>Ajouter un sujet à l'Info lettre</h1>
-  <p class="lead">Vos sujets s'ajoutent à ceux de la veille automatique, dans la rubrique choisie et dans le brouillon de l'infolettre. Ils sont publiés quand vous enregistrez le fichier sur GitHub (étapes en bas de page).</p>
+  <h1>Ajouter des sujets et des sources</h1>
+  <p class="lead">Vos sujets s'ajoutent à ceux de la veille automatique, dans la rubrique choisie et dans le brouillon de l'infolettre. Vos sources rejoignent le répertoire et sont consultées chaque mois par la veille automatique. Tout est publié quand vous enregistrez le fichier sur GitHub (étapes en bas de page).</p>
 
   <div class="cols">
     <div class="panel">
@@ -109,12 +109,44 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
     </div>
 
     <div class="panel">
-      <h2>2. Sujets de cette édition</h2>
+      <h2>Sujets de cette édition</h2>
       <ul class="list" id="list"></ul>
       <div class="actions">
-        <button class="btn warn" type="button" id="reset">Vider la liste (nouvelle édition)</button>
+        <button class="btn warn" type="button" id="reset">Vider les sujets (nouvelle édition)</button>
       </div>
       <p class="msg" id="resetmsg" aria-live="polite"></p>
+    </div>
+  </div>
+
+
+  <div class="cols" style="margin-top:24px">
+    <div class="panel">
+      <h2>2. Nouvelle source de veille</h2>
+      <form id="fs" novalidate>
+        <div class="row2">
+          <label for="s-famille">Famille
+            <select id="s-famille">
+              <option>National</option><option>Réseau</option><option>Académie</option><option>Économie</option>
+              <option>Europe</option><option>Recherche</option><option>Outils</option><option>Autre</option>
+            </select>
+          </label>
+          <label for="s-nom">Nom de la source
+            <input id="s-nom" type="text" maxlength="100" placeholder="Ex. Lettre de la CARDIE Lille">
+          </label>
+        </div>
+        <label for="s-url">Adresse <small>page à consulter chaque mois, commençant par https://</small>
+          <input id="s-url" type="url" placeholder="https://…">
+        </label>
+        <label for="s-contenu">Ce qu'on y trouve <small>une phrase</small>
+          <input id="s-contenu" type="text" maxlength="200" placeholder="Ex. Projets innovants et appels à expérimentation">
+        </label>
+        <button class="btn" type="submit">Ajouter la source</button>
+        <p class="msg" id="smsg" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Mes sources ajoutées</h2>
+      <ul class="list" id="slist"></ul>
     </div>
   </div>
 
@@ -124,7 +156,7 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
       <li><span>Cliquez sur <strong>« Copier le fichier »</strong>.</span></li>
       <li><span>Cliquez sur <strong>« Ouvrir le fichier sur GitHub »</strong> (connectez-vous si besoin).</span></li>
       <li><span>Dans l'éditeur GitHub, sélectionnez tout le contenu, collez, puis cliquez sur <strong>« Commit changes »</strong>.</span></li>
-      <li><span>Vos sujets apparaissent sur l'Info lettre une à deux minutes plus tard.</span></li>
+      <li><span>Vos sujets et vos sources apparaissent sur l'Info lettre une à deux minutes plus tard.</span></li>
     </ol>
     <div class="actions">
       <button class="btn" type="button" id="copy">Copier le fichier</button>
@@ -140,7 +172,8 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
   var PICTOS=['📌','📢','🧠','📜','🏫','🎓','📊','💼','🏆','📅','⏰','👥','💻','🤖','🛡️','🌱','🇪🇺','📚','🎥','💡'];
   var LABEL={actualites:'Actualités',diplomes:'Ressources par diplôme',agenda:'Agenda et formations'};
   var KEY='iane-ajouts-brouillon';
-  var data={items:[]}, picto='📌', dirty=false;
+  var data={items:[],sources:[]}, picto='📌', dirty=false;
+  function norm(d){return {items:(d&&d.items)||[],sources:(d&&d.sources)||[]}}
   var $=function(id){return document.getElementById(id)};
 
   var pk=$('picker');
@@ -167,8 +200,33 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
       d.addEventListener('click',function(){data.items.splice(n,1);dirty=true;save();render()});
       li.appendChild(p);li.appendChild(t);li.appendChild(d);ul.appendChild(li);
     });
+    var sl=$('slist');sl.innerHTML='';
+    if(!data.sources.length){var e2=document.createElement('li');e2.className='empty';e2.style.display='block';e2.textContent='Aucune source ajoutée pour l\'instant.';sl.appendChild(e2)}
+    data.sources.forEach(function(x,n){
+      var li=document.createElement('li');
+      var p=document.createElement('div');p.className='pic';p.style.background='var(--c4s)';p.textContent='🔗';
+      var t=document.createElement('div');
+      var a=document.createElement('div');a.className='li-t';a.textContent=x.nom||x.url;
+      var m=document.createElement('div');m.className='li-m';m.textContent=x.famille+' · '+x.url;
+      t.appendChild(a);t.appendChild(m);
+      var d=document.createElement('button');d.className='del';d.type='button';d.textContent='Retirer';
+      d.addEventListener('click',function(){data.sources.splice(n,1);dirty=true;save();render()});
+      li.appendChild(p);li.appendChild(t);li.appendChild(d);sl.appendChild(li);
+    });
     $('out').textContent=JSON.stringify(data,null,2);
   }
+
+  $('fs').addEventListener('submit',function(e){
+    e.preventDefault();
+    var nom=$('s-nom').value.trim(), url=$('s-url').value.trim(), msg=$('smsg');msg.className='msg';
+    if(!nom){msg.className='msg err';msg.textContent='Indiquez le nom de la source.';$('s-nom').focus();return}
+    if(!/^https?:\/\/\S+$/.test(url)){msg.className='msg err';msg.textContent='L\'adresse doit commencer par https:// et ne pas contenir d\'espace.';$('s-url').focus();return}
+    if(data.sources.some(function(x){return x.url===url})){msg.className='msg err';msg.textContent='Cette adresse est déjà dans vos sources.';return}
+    data.sources.push({famille:$('s-famille').value,nom:nom,url:url,contenu:$('s-contenu').value.trim()});
+    dirty=true;save();render();
+    msg.textContent='Source ajoutée. Pensez à la publier (étape 3).';
+    ['s-nom','s-url','s-contenu'].forEach(function(id){$(id).value=''});
+  });
 
   $('f').addEventListener('submit',function(e){
     e.preventDefault();
@@ -186,7 +244,7 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
   var armed=false;
   $('reset').addEventListener('click',function(){
     var m=$('resetmsg');
-    if(!armed){armed=true;m.className='msg err';m.textContent='Cliquez une seconde fois pour confirmer : tous les sujets de la liste seront retirés.';setTimeout(function(){armed=false;m.textContent=''},5000);return}
+    if(!armed){armed=true;m.className='msg err';m.textContent='Cliquez une seconde fois pour confirmer : tous les sujets seront retirés (les sources restent).';setTimeout(function(){armed=false;m.textContent=''},5000);return}
     armed=false;data.items=[];dirty=true;save();render();m.className='msg';m.textContent='Liste vidée. Publiez le fichier pour l\'appliquer à l\'Info lettre.';
   });
 
@@ -198,12 +256,12 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
 
   var local=null;try{local=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
   fetch('ajouts.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
-    data={items:(d&&d.items)||[]};
-    if(local&&local.items&&JSON.stringify(local.items)!==JSON.stringify(data.items)&&local.items.length){
-      data=local;$('msg').textContent='Brouillon non publié retrouvé sur cet appareil.';
+    data=norm(d);
+    if(local&&JSON.stringify(norm(local))!==JSON.stringify(data)&&((local.items||[]).length||(local.sources||[]).length)){
+      data=norm(local);$('msg').textContent='Modifications non publiées retrouvées sur cet appareil.';
     }
     render();
-  }).catch(function(){if(local&&local.items)data=local;render()});
+  }).catch(function(){if(local)data=norm(local);render()});
   render();
 })();
 </script>
