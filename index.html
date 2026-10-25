@@ -262,6 +262,14 @@ footer a{color:var(--hero-ink)}
   .card,.reg-item,.method-card,.hero-meta div,nav.tabs a,.chip,.copy-btn{transition:none}
 }
 .tag.mine{background:var(--sun);color:#1a1033}
+.lockform{display:grid;gap:6px;margin-top:4px}
+.lockform label{font-size:.82rem;font-weight:700}
+.lockrow{display:flex;gap:8px;flex-wrap:wrap}
+.lockrow input{flex:1 1 160px;min-width:0;font:inherit;font-size:.9rem;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper-2);color:var(--ink)}
+.lockrow input:focus{outline:2px solid var(--coral);outline-offset:1px}
+.lockrow button{font:inherit;font-size:.84rem;font-weight:700;border:0;border-radius:999px;padding:9px 16px;background:linear-gradient(135deg,var(--sun),var(--coral));color:#1a1033;cursor:pointer}
+.lockrow button[disabled]{opacity:.6;cursor:wait}
+.lockmsg{margin:0;min-height:1.2em;font-size:.82rem;color:var(--coral)}
 </style>
 </head>
 <body>
@@ -331,7 +339,12 @@ footer a{color:var(--hero-ink)}
       <div class="card">
         <div class="card-tags"><span class="tag fr">Académie de Lille</span><span class="tag recherche">Économie-gestion</span></div>
         <h3>Info lettre IANE · édition mensuelle</h3>
-        <div class="card-foot"><span class="freq">Mensuel</span><a href="infolettre-iane/">Ouvrir l'Info lettre →</a></div>
+        <form class="lockform" id="lockform" autocomplete="off">
+          <label for="lockpw">🔒 Accès réservé : mot de passe</label>
+          <div class="lockrow"><input id="lockpw" type="password" required placeholder="Mot de passe"><button type="submit" id="lockgo">Ouvrir l'Info lettre →</button></div>
+          <p class="lockmsg" id="lockmsg" role="alert"></p>
+        </form>
+        <div class="card-foot"><span class="freq">Mensuel · accès protégé</span></div>
       </div>
     </div>
   </div>
@@ -834,6 +847,33 @@ footer a{color:var(--hero-ink)}
     if(tot){var hs=[].slice.call(document.querySelectorAll('.hero-meta div')).filter(function(dv){return /sources référencées/.test(dv.textContent)})[0];if(hs)bump2(hs.querySelector('strong'),tot)}
     function bump2(e,n){if(e){var v=parseInt(e.textContent,10);if(!isNaN(v))e.textContent=String(v+n)}}
   }).catch(function(){});
+})();
+</script>
+
+<script>
+/* Accès protégé à l'Info lettre IANE : vérifie le mot de passe puis ouvre l'espace */
+(function(){
+  var f=document.getElementById('lockform');if(!f)return;
+  var S=window.crypto&&window.crypto.subtle;
+  function b(s){var r=atob(s),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+  function b64(buf){var a=new Uint8Array(buf),s='';for(var i=0;i<a.length;i++)s+=String.fromCharCode(a[i]);return btoa(s)}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('lockgo'),msg=document.getElementById('lockmsg'),pw=document.getElementById('lockpw').value;
+    if(!S){msg.textContent='Navigateur non compatible.';return}
+    btn.disabled=true;msg.textContent='';
+    fetch('infolettre-iane/cle.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('cle');return r.json()}).then(function(C){
+      return S.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey'])
+        .then(function(m){return S.deriveKey({name:'PBKDF2',salt:b(C.salt),iterations:C.iterations,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['decrypt'])})
+        .then(function(k){return S.decrypt({name:'AES-GCM',iv:b(C.iv)},k,b(C.cle_privee_chiffree))});
+    }).then(function(pk8){
+      try{sessionStorage.setItem('iane-cle-privee',b64(pk8))}catch(e){}
+      window.location.href='infolettre-iane/';
+    }).catch(function(err){
+      btn.disabled=false;
+      msg.textContent=(err&&err.message==='cle')?'Fichier de clé introuvable. Réessayez plus tard.':'Mot de passe incorrect.';
+    });
+  });
 })();
 </script>
 </body>
