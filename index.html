@@ -262,6 +262,19 @@ footer a{color:var(--hero-ink)}
   .card,.reg-item,.method-card,.hero-meta div,nav.tabs a,.chip,.copy-btn{transition:none}
 }
 .tag.mine{background:var(--sun);color:#1a1033}
+/* Badge NEW : source nouvelle ou information nouvelle depuis la mise à jour précédente */
+.tag.new{background:linear-gradient(90deg,#ff3d7f,#ff8a3d);color:#fff;font-weight:700;letter-spacing:.06em;animation:newpulse 2.4s ease-in-out infinite}
+@keyframes newpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,61,127,.45)}50%{box-shadow:0 0 0 6px rgba(255,61,127,0)}}
+@media (prefers-reduced-motion:reduce){.tag.new{animation:none}}
+.card.is-new{border-color:#ff3d7f;box-shadow:0 0 0 2px rgba(255,61,127,.25),var(--shadow)}
+.nouveaute{font-size:.84rem;margin:0;padding:8px 10px;border-radius:10px;background:rgba(255,61,127,.09);color:var(--ink);border-left:3px solid #ff3d7f}
+.nouveaute b{color:#d81b60}
+.reg-item.is-new{border-color:#ff3d7f}
+.reg-new{display:inline-block;margin-left:8px;vertical-align:middle}
+.newsbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding:12px 16px;border-radius:14px;background:linear-gradient(90deg,rgba(255,61,127,.9),rgba(255,138,61,.9));color:#fff;text-decoration:none;font-weight:600;font-size:.92rem}
+.newsbar:hover{filter:brightness(1.07)}
+.newsbar b{font-size:1.2rem}
+.chip[data-filter="new"]{border-color:#ff3d7f}
 .lockform{display:grid;gap:6px;margin-top:4px}
 .lockform label{font-size:.82rem;font-weight:700}
 .lockrow{display:flex;gap:8px;flex-wrap:wrap}
@@ -312,6 +325,7 @@ footer a{color:var(--hero-ink)}
         <div><strong>4</strong>gabarits d'agent de veille</div>
         <div><strong id="today-date">19 oct. 2026</strong>dernière vérification</div>
       </div>
+      <a class="newsbar" id="newsbar" href="#ia-generale" hidden><span aria-hidden="true">🆕</span><span><b id="newscount">0</b> <span id="newslabel">nouveautés</span> depuis la mise à jour précédente</span><span>Voir →</span></a>
     </div>
     <aside class="identity">
       <div class="identity-head">
@@ -371,6 +385,7 @@ footer a{color:var(--hero-ink)}
     <p class="section-intro">Réglementation, stratégie publique et recherche sur l'IA, hors champ éducatif : cadre juridique européen, doctrine nationale, données de référence.</p>
     <div class="chips" data-group="generale">
       <button class="chip active" data-filter="all">Toutes</button>
+      <button class="chip" data-filter="new">🆕 Nouveautés</button>
       <button class="chip" data-filter="fr">France</button>
       <button class="chip" data-filter="eu">Union européenne</button>
       <button class="chip" data-filter="recherche">Recherche</button>
@@ -386,6 +401,7 @@ footer a{color:var(--hero-ink)}
     <p class="section-intro">Cadres d'usage, référentiels de compétences, ressources pédagogiques et recherche appliquée à l'enseignement et à la formation.</p>
     <div class="chips" data-group="education">
       <button class="chip active" data-filter="all">Toutes</button>
+      <button class="chip" data-filter="new">🆕 Nouveautés</button>
       <button class="chip" data-filter="fr">France</button>
       <button class="chip" data-filter="eu">Union européenne</button>
       <button class="chip" data-filter="unesco">UNESCO</button>
@@ -472,6 +488,14 @@ footer a{color:var(--hero-ink)}
 (function(){
   "use strict";
 
+  /* Badge NEW : une source porte nouveau:"AAAA-MM-JJ" (date d'ajout ou de nouvelle information)
+     et nouveaute:"ce qui est nouveau". Elle est marquée NEW si cette date est postérieure à VERIF_PRECEDENTE. */
+  var DERNIERE_VERIF = "2026-10-19";
+  var VERIF_PRECEDENTE = "2026-10-19";
+  window.OBS_VERIF_PRECEDENTE = VERIF_PRECEDENTE;
+  function isNew(d){ return !!d && d > VERIF_PRECEDENTE; }
+  window.OBS_isNew = isNew;
+
   var SOURCES_GENERALE = [
     {tag:"eu", label:"UE", title:"AI Act — Bureau de l'IA de la Commission", desc:"Actualités officielles sur l'application du règlement européen sur l'IA : entrée en vigueur des obligations, transparence, calendrier.", url:"https://digital-strategy.ec.europa.eu/fr/policies/regulatory-framework-ai", freq:"Suivi continu"},
     {tag:"eu", label:"UE", title:"Calendrier de mise en œuvre de l'AI Act", desc:"Calendrier officiel (traduction eTranslation) des échéances du règlement IA, article par article, par le service desk de la Commission.", url:"https://ai-act-service-desk.ec.europa.eu/fr/ai-act/timeline/calendrier-de-mise-en-oeuvre-de-la-legislation-de-lue-sur-lia", freq:"Mise à jour continue"},
@@ -521,9 +545,11 @@ footer a{color:var(--hero-ink)}
   ];
 
   function cardHTML(s){
-    return '<div class="card" data-tag="'+s.tag+'">'
-      + '<div class="card-tags"><span class="tag '+s.tag+'">'+s.label+'</span></div>'
+    var nw = isNew(s.nouveau);
+    return '<div class="card'+(nw?' is-new':'')+'" data-tag="'+s.tag+'">'
+      + '<div class="card-tags"><span class="tag '+s.tag+'">'+s.label+'</span>'+(nw?'<span class="tag new">🆕 New</span>':'')+'</div>'
       + '<h3>'+s.title+'</h3>'
+      + (nw && s.nouveaute ? '<p class="nouveaute"><b>Nouveau :</b> '+s.nouveaute+'</p>' : '')
       + '<p>'+s.desc+'</p>'
       + '<div class="card-foot"><span class="freq">'+s.freq+'</span><a href="'+s.url+'" target="_blank" rel="noopener">Consulter →</a></div>'
       + '</div>';
@@ -547,18 +573,30 @@ footer a{color:var(--hero-ink)}
         var f = chip.getAttribute("data-filter");
         var cards = document.getElementById(gridId).querySelectorAll(".card");
         cards.forEach(function(card){
-          card.hidden = !(f === "all" || card.getAttribute("data-tag") === f);
+          card.hidden = !(f === "all" || (f === "new" ? card.classList.contains("is-new") : card.getAttribute("data-tag") === f));
         });
       });
     });
   }
   wireFilters("grid-generale");
   wireFilters("grid-education");
+  window.OBS_majNews = function(){
+    var n = document.querySelectorAll(".card.is-new, .reg-item.is-new").length, bar = document.getElementById("newsbar");
+    if(!bar) return;
+    bar.hidden = !n;
+    document.getElementById("newscount").textContent = n;
+    document.getElementById("newslabel").textContent = n > 1 ? "nouveautés" : "nouveauté";
+    var first = document.querySelector(".card.is-new, .reg-item.is-new");
+    var sec = first && first.closest("section");
+    if(sec && sec.id) bar.href = "#" + sec.id;
+  };
 
   var regList = document.getElementById("reg-list");
   regList.innerHTML = REGULATION.map(function(r){
-    return '<div class="reg-item"><div class="reg-date">'+r.date+'</div><div class="reg-body"><h3>'+r.title+'</h3><p>'+r.desc+'</p><a href="'+r.url+'" target="_blank" rel="noopener">Source officielle →</a></div></div>';
+    var nw = isNew(r.nouveau);
+    return '<div class="reg-item'+(nw?' is-new':'')+'"><div class="reg-date">'+r.date+'</div><div class="reg-body"><h3>'+r.title+(nw?'<span class="tag new reg-new">🆕 New</span>':'')+'</h3>'+(nw && r.nouveaute ? '<p class="nouveaute"><b>Nouveau :</b> '+r.nouveaute+'</p>' : '')+'<p>'+r.desc+'</p><a href="'+r.url+'" target="_blank" rel="noopener">Source officielle →</a></div></div>';
   }).join("");
+  window.OBS_majNews();
 
   /* ---------- 5. Générateur de requêtes de veille ---------- */
   function host(u){ try{ return new URL(u).hostname.replace(/^www\./,""); }catch(e){ return u; } }
@@ -832,15 +870,19 @@ footer a{color:var(--hero-ink)}
       if(!x||!/^https?:\/\//.test(x.url||''))return;
       var sec=x.section==='generale'?'generale':'education', tag=LAB[x.tag]?x.tag:'recherche';
       var grid=document.getElementById('grid-'+sec);if(!grid)return;
-      var c=el('div','card');c.setAttribute('data-tag',tag);
-      var t=el('div','card-tags');t.appendChild(el('span','tag '+tag,LAB[tag]));t.appendChild(el('span','tag mine','ajoutée par Luc'));c.appendChild(t);
-      c.appendChild(el('h3',null,x.nom||x.url));c.appendChild(el('p',null,x.desc||''));
+      var nw=window.OBS_isNew&&window.OBS_isNew(x.nouveau||x.ajoute_le);
+      var c=el('div','card'+(nw?' is-new':''));c.setAttribute('data-tag',tag);
+      var t=el('div','card-tags');t.appendChild(el('span','tag '+tag,LAB[tag]));t.appendChild(el('span','tag mine','ajoutée par Luc'));if(nw)t.appendChild(el('span','tag new','🆕 New'));c.appendChild(t);
+      c.appendChild(el('h3',null,x.nom||x.url));
+      if(nw&&x.nouveaute){var pn=el('p','nouveaute');pn.appendChild(el('b',null,'Nouveau : '));pn.appendChild(document.createTextNode(x.nouveaute));c.appendChild(pn)}
+      c.appendChild(el('p',null,x.desc||''));
       var f=el('div','card-foot');f.appendChild(el('span','freq',x.freq||'À vérifier'));
       var a=el('a',null,'Consulter →');a.href=x.url;a.target='_blank';a.rel='noopener';f.appendChild(a);c.appendChild(f);
       var active=document.querySelector('.chips[data-group="'+sec+'"] .chip.active');
-      var flt=active?active.getAttribute('data-filter'):'all';if(flt!=='all'&&flt!==tag)c.hidden=true;
+      var flt=active?active.getAttribute('data-filter'):'all';if(flt!=='all'&&(flt==='new'?!nw:flt!==tag))c.hidden=true;
       grid.appendChild(c);added[sec]++;
     });
+    if(window.OBS_majNews)window.OBS_majNews();
     if(added.generale)bump('#ia-generale .count',added.generale);
     if(added.education)bump('#ia-education .count',added.education);
     var tot=added.generale+added.education;

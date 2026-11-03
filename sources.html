@@ -157,7 +157,7 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:var(--f-mono);font-si
     if(!nom){msg.className='msg err';msg.textContent='Indiquez le nom de la source.';$('nom').focus();return}
     if(!/^https?:\/\/\S+$/.test(url)){msg.className='msg err';msg.textContent='L\'adresse doit commencer par https:// et ne pas contenir d\'espace.';$('url').focus();return}
     if(data.sources.some(function(x){return x.url===url})){msg.className='msg err';msg.textContent='Cette adresse est déjà dans vos sources.';return}
-    data.sources.push({section:$('section').value,tag:$('tag').value,nom:nom,url:url,desc:$('desc').value.trim(),freq:$('freq').value.trim()});
+    data.sources.push({section:$('section').value,tag:$('tag').value,nom:nom,url:url,desc:$('desc').value.trim(),freq:$('freq').value.trim(),ajoute_le:new Date().toISOString().slice(0,10)});
     save();render();
     msg.textContent='Source ajoutée. Pensez à la publier (étape 2).';
     ['nom','url','desc','freq'].forEach(function(id){$(id).value=''});
