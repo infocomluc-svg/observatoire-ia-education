@@ -2,64 +2,74 @@
   "items": [],
   "sources": [
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "Ars Technica",
       "url": "https://arstechnica.com/",
-      "contenu": "Presse tech américaine : IA, cybersécurité, régulation"
+      "contenu": "Presse tech américaine : IA, cybersécurité, régulation",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "AWS Machine Learning Blog",
       "url": "https://aws.amazon.com/blogs/machine-learning/",
-      "contenu": "Blog d'entreprise (Amazon) : annonces de produits IA"
+      "contenu": "Blog d'entreprise (Amazon) : annonces de produits IA",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "BBC News – Technology",
       "url": "https://www.bbc.com/news/technology",
-      "contenu": "Actualité tech internationale (service public britannique)"
+      "contenu": "Actualité tech internationale (service public britannique)",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "Cloudflare Blog",
       "url": "https://blog.cloudflare.com/",
-      "contenu": "Blog d'entreprise : cybersécurité, trafic web, robots d'IA"
+      "contenu": "Blog d'entreprise : cybersécurité, trafic web, robots d'IA",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "Digital Trends",
       "url": "https://www.digitaltrends.com/",
-      "contenu": "Presse tech grand public : produits et usages"
+      "contenu": "Presse tech grand public : produits et usages",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "MIT Technology Review",
       "url": "https://www.technologyreview.com/",
-      "contenu": "Analyses de fond sur l'IA et ses effets sur la société"
+      "contenu": "Analyses de fond sur l'IA et ses effets sur la société",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "OpenAI News",
       "url": "https://openai.com/news/",
-      "contenu": "Blog d'entreprise (OpenAI) : annonces de modèles et d'usages"
+      "contenu": "Blog d'entreprise (OpenAI) : annonces de modèles et d'usages",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "CNBC – Tech",
       "url": "https://www.cnbc.com/technology/",
-      "contenu": "Presse économique : marchés et entreprises de la tech"
+      "contenu": "Presse économique : marchés et entreprises de la tech",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "The GitHub Blog",
       "url": "https://github.blog/",
-      "contenu": "Blog d'entreprise (GitHub) : développement logiciel et IA"
+      "contenu": "Blog d'entreprise (GitHub) : développement logiciel et IA",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     },
     {
-      "famille": "Tech internationale (EN)",
+      "famille": "Repérage IA (sites anglophones)",
       "nom": "The Verge – Artificial Intelligence",
       "url": "https://www.theverge.com/ai-artificial-intelligence",
-      "contenu": "Presse tech : actualité de l'IA grand public"
+      "contenu": "Presse tech : actualité de l'IA grand public",
+      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     }
   ]
 }
