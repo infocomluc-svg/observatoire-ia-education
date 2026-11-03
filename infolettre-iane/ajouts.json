@@ -1,4 +1,65 @@
 {
   "items": [],
-  "sources": []
+  "sources": [
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "Ars Technica",
+      "url": "https://arstechnica.com/",
+      "contenu": "Presse tech américaine : IA, cybersécurité, régulation"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "AWS Machine Learning Blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/",
+      "contenu": "Blog d'entreprise (Amazon) : annonces de produits IA"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "BBC News – Technology",
+      "url": "https://www.bbc.com/news/technology",
+      "contenu": "Actualité tech internationale (service public britannique)"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "Cloudflare Blog",
+      "url": "https://blog.cloudflare.com/",
+      "contenu": "Blog d'entreprise : cybersécurité, trafic web, robots d'IA"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "Digital Trends",
+      "url": "https://www.digitaltrends.com/",
+      "contenu": "Presse tech grand public : produits et usages"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/",
+      "contenu": "Analyses de fond sur l'IA et ses effets sur la société"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "OpenAI News",
+      "url": "https://openai.com/news/",
+      "contenu": "Blog d'entreprise (OpenAI) : annonces de modèles et d'usages"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "CNBC – Tech",
+      "url": "https://www.cnbc.com/technology/",
+      "contenu": "Presse économique : marchés et entreprises de la tech"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "The GitHub Blog",
+      "url": "https://github.blog/",
+      "contenu": "Blog d'entreprise (GitHub) : développement logiciel et IA"
+    },
+    {
+      "famille": "Tech internationale (EN)",
+      "nom": "The Verge – Artificial Intelligence",
+      "url": "https://www.theverge.com/ai-artificial-intelligence",
+      "contenu": "Presse tech : actualité de l'IA grand public"
+    }
+  ]
 }
