@@ -2,6 +2,13 @@
   "items": [],
   "sources": [
     {
+      "famille": "Académie de Lille",
+      "nom": "CARDIE – SÉPIA : infolettre Innovation et numérique",
+      "url": "https://www1.ac-lille.fr/",
+      "contenu": "Innovation pédagogique, expérimentations et numérique dans l'académie de Lille",
+      "desc": "Lettre reçue dans Gmail (transmise par Luc, libellé IANE). Source académique prioritaire : projets innovants, appels à projets, journées de l'innovation, usages du numérique. Citer la page académique d'origine quand elle existe, sinon badge « lettre reçue »."
+    },
+    {
       "famille": "Repérage IA (sites anglophones)",
       "nom": "Ars Technica",
       "url": "https://arstechnica.com/",
