@@ -2,6 +2,13 @@
   "items": [],
   "sources": [
     {
+      "famille": "Éduscol – économie-gestion",
+      "nom": "Cahier ÉduNum économie-gestion (n°65, octobre 2026)",
+      "url": "https://eduscol.education.gouv.fr/4419/economie-et-gestion",
+      "contenu": "Veille numérique et IA de l'inspection générale pour l'économie-gestion (paraît environ tous les six mois)",
+      "desc": "N°65 d'octobre 2026 reçu par Gmail le 5 nov. 2026 (PDF, libellé IANE). Source prioritaire de la rubrique « Ressources par diplôme ». Le site éduscol bloque la lecture automatique : utiliser la recherche web, badge « à confirmer » si le contenu n'a pas pu être vérifié. Le n°64 datait d'avril 2026."
+    },
+    {
       "famille": "Innovation pédagogique (national, relayé par la CARDIE)",
       "nom": "Campus de l'innovation – infolettre (DGESCO, relayée par la CARDIE / SÉPIA)",
       "url": "https://partage02.magistere.apps.education.fr/course/section.php?id=3",
