@@ -35,8 +35,6 @@ SOURCES = [
      "https://pedagogie.ac-lille.fr/ecogestion/feed/"),
     ("drane-lille", "DRANE de Lille", 2, "rss",
      "https://dane.site.ac-lille.fr/feed/"),
-    ("certa", "Réseau CERTA", 2, "rss",
-     "https://www.reseaucerta.org/rss.xml"),
 ]
 
 # Filtre IA / numérique (sur titre + résumé), en minuscules
@@ -124,28 +122,22 @@ MOIS = {m: i for i, m in enumerate(["janvier", "février", "mars", "avril", "mai
 
 
 def page_edunum(src_id, nom, prio, url):
-    """Page éduscol des Cahiers ÉduNum : un PDF par discipline, titre « … n° NN - mois AAAA »."""
-    h = lire(url)
-    p = _Liens()
-    p.feed(h)
-    vus, sortie = set(), []
-    # Le texte qui suit chaque titre de PDF sert de résumé
-    brut = texte(h, 10 ** 7)
-    for href, t in p.liens:
-        m = re.search(r"(Cahier|Lettre)s?\s+[ÉE]du\s*Num.*?n\s*°\s*\d+\s*-\s*([a-zéû]+)\s+(\d{4})", t, re.I)
-        if not m or t in vus:
+    """Page éduscol des Cahiers ÉduNum, lue via le service public de lecture r.jina.ai
+    (éduscol refuse les robots directs). Titre attendu : « Cahier ÉduNum … n° NN - mois AAAA »."""
+    md = lire("https://r.jina.ai/" + url)
+    sortie, vus = [], set()
+    for m in re.finditer(r"\[((?:Cahier|Lettre)s?[^\]]*?[ÉE]du\s*Num[^\]]*?n\s*°\s*\d+[^\]]*?)\]\((https?://[^)\s]+)\)", md, re.I):
+        titre, lien = " ".join(m.group(1).split()), m.group(2)
+        d = re.search(r"-\s*([a-zéû]+)\s+(\d{4})", titre, re.I)
+        if not d or titre in vus:
             continue
-        vus.add(t)
-        mois = MOIS.get(m.group(2).lower(), 1)
-        lien = href if href.startswith("http") else "https://eduscol.education.gouv.fr" + href
-        i = brut.find(t)
-        resume = ""
-        if i >= 0:
-            suite = brut[i + len(t): i + len(t) + 900]
-            suite = re.sub(r"^.*?Ajouter aux favoris\s*", "", suite)
-            resume = texte(suite.split("Consulter les lettres")[0], 400)
-        sortie.append({"source": src_id, "nom_source": nom, "priorite": prio, "titre": t,
-                       "url": lien, "date": f"{m.group(3)}-{mois:02d}-01", "resume": resume,
+        vus.add(titre)
+        mois = MOIS.get(d.group(1).lower(), 1)
+        suite = md[m.end(): m.end() + 1200]
+        suite = re.sub(r"^.*?Ajouter aux favoris[^\n]*\n", "", suite, flags=re.S)
+        resume = texte(re.split(r"Consulter les lettres|S'abonner", suite)[0].replace("*", ""), 400)
+        sortie.append({"source": src_id, "nom_source": nom, "priorite": prio, "titre": titre,
+                       "url": lien, "date": f"{d.group(2)}-{mois:02d}-01", "resume": resume,
                        "rubrique": "Cahiers ÉduNum", "page": url})
     return sortie
 
