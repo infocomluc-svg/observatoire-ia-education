@@ -1,0 +1,39 @@
+name: Collecte des sources de l'Info lettre IANE
+
+# Lit chaque semaine les flux publics des sources prioritaires (CRCOM, CREG, éduscol ÉduNum,
+# pédagogie Lille, DRANE Lille, CERTA), garde les publications IA/numérique
+# et met à jour infolettre-iane/flux.json. Aucune clé API.
+on:
+  schedule:
+    - cron: "23 4 * * 1"   # lundi, 5 h 23 heure de Paris (hiver)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collecte-infolettre
+  cancel-in-progress: false
+
+jobs:
+  collecte:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collecter les flux
+        run: python3 scripts/collecte_flux.py
+      - name: Enregistrer si changement
+        run: |
+          if git diff --quiet -- infolettre-iane/flux.json; then
+            echo "Aucun changement."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add infolettre-iane/flux.json
+          git commit -m "Info lettre IANE : collecte hebdomadaire des sources prioritaires"
+          git pull --rebase origin main
+          git push origin HEAD:main
