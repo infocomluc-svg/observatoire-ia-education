@@ -186,6 +186,9 @@ def main():
         "items": uniques,
     }
     SORTIE.write_text(json.dumps(donnees, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for s in etat:
+        if not s["ok"]:
+            print(f"ERREUR {s['source']} ({s['url']}) : {s['erreur']}")
     print(f"{len(uniques)} publications retenues ; " +
           ", ".join(f"{s['source']}={'ok ' + str(s.get('retenus')) if s['ok'] else 'ERREUR'}" for s in etat))
 

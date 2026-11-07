@@ -27,7 +27,7 @@ jobs:
         run: python3 scripts/collecte_flux.py
       - name: Enregistrer si changement
         run: |
-          if git diff --quiet -- infolettre-iane/flux.json; then
+          if [ -z "$(git status --porcelain -- infolettre-iane/flux.json)" ]; then
             echo "Aucun changement."
             exit 0
           fi
