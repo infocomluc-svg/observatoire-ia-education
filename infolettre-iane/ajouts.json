@@ -2,88 +2,76 @@
   "items": [],
   "sources": [
     {
-      "famille": "Éduscol – économie-gestion",
-      "nom": "Cahier ÉduNum économie-gestion (n°65, octobre 2026)",
-      "url": "https://edubase.eduscol.education.fr/recherche?academie%5b0%5d=Lille&discipline%5b0%5d=%C3%89conomie%20et%20gestion&sort=createdAt_desc",
-      "contenu": "Cahier ÉduNum Économie-gestion n°65 (octobre 2026, DNE) : « Les apports pédagogiques de l'IA en économie-gestion », synthèse des TraAM de Créteil, Lille, Nantes, Orléans-Tours et Strasbourg",
-      "desc": "PDF lu le 5 nov. 2026 (contenu vérifié, badge « lettre reçue »). Sujets pour l'édition n°3 : (1) LILLE à la une : parcours SGN 1re STMG sur la « création de valeur », l'IA assistante de l'enseignant (Éléa + Nolej : podcasts, cartes-éclairs, agent conversationnel, quiz), jeu de cartes « Valeur ? Valeurs ? Pour qui ? Pour quoi ? », parcours Éléa en 3 unités — https://pedagogie.ac-lille.fr/ecogestion/les-traam-en-economie-gestion-pour-lannee-scolaire-2025-2026/ ; (2) Nantes : 9 scénarios (STMG, STS CG, SAM, GPME, ETLV), agent conversationnel paramétré pour produire des erreurs afin d'entraîner la vérification — https://pedagogie.ac-nantes.fr/les-disciplines-du-second-degre/economie-gestion-lgt/traam-ecogest-de-lcademie-de-nantes ; (3) Strasbourg : 5 expérimentations STMG, usage autonome, critique et responsable — https://pedagogie.ac-strasbourg.fr/ecogestion/usages-du-numerique/le-numerique-en-pratique-avec-les-traam/lia-comme-levier-de-formation-des-eleves ; (4) Orléans-Tours : 10 expérimentations, 150 élèves, méthode CRAFT pour le Grand oral STMG, argumentation orale en SGN, impact environnemental en BTS SIO, alertes clients en BTS Banque — https://pedagogie.ac-orleans-tours.fr/spip.php?rubrique2406 ; (5) Créteil : IA et recherche documentaire en 2de pro, BTS MCO (comparaison CDI / IA), Mistral pour l'étude de gestion STMG, élèves de 2de métiers de la relation client qui créent un agent d'orientation avec Digipage — https://economie-gestion.ac-creteil.fr/spip.php?rubrique250 ; (6) Focus compar:IA, comparateur d'IA du service public (ministère de la Culture), sans compte élève — https://comparia.beta.gouv.fr/ . Abonnement au cahier : https://listes.education.fr/sympa/info/edunum-ecogest"
-    },
-    {
-      "famille": "Innovation pédagogique (national, relayé par la CARDIE)",
+      "famille": "Secondaire",
       "nom": "Campus de l'innovation – infolettre (DGESCO, relayée par la CARDIE / SÉPIA)",
       "url": "https://partage02.magistere.apps.education.fr/course/section.php?id=3",
-      "contenu": "Espace national de développement professionnel sur Magistère (accès avec le compte académique) : innovation, expérimentation, numérique et IA",
+      "contenu": "Campus de l'innovation (Magistère) : fil rouge 2026-2027 sur l'évaluation, angle numérique et IA",
       "desc": "Lettre reçue par Gmail (libellé IANE), PDF lu le 4 nov. 2026. Rentrée 2026 : nouvel accueil du Campus ; fil rouge 2026-2027 « Évaluer aujourd'hui : mesurer, accompagner ou faire apprendre ? » ouvert en novembre-décembre 2026, avec un angle « pratiques pédagogiques avec le numérique dont l'IA » ; contributions possibles toute l'année (pratique innovante ou proposition libre, formulaires Grist de la DGESCO). Échéance du 10 oct. 2026 passée : ne pas l'annoncer. Lien Magistère : préciser « connexion avec votre compte académique »."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "Ars Technica",
-      "url": "https://arstechnica.com/",
-      "contenu": "Presse tech américaine : IA, cybersécurité, régulation",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "AWS Machine Learning Blog",
-      "url": "https://aws.amazon.com/blogs/machine-learning/",
-      "contenu": "Blog d'entreprise (Amazon) : annonces de produits IA",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "BBC News – Technology",
-      "url": "https://www.bbc.com/news/technology",
-      "contenu": "Actualité tech internationale (service public britannique)",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "Cloudflare Blog",
-      "url": "https://blog.cloudflare.com/",
-      "contenu": "Blog d'entreprise : cybersécurité, trafic web, robots d'IA",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "Digital Trends",
-      "url": "https://www.digitaltrends.com/",
-      "contenu": "Presse tech grand public : produits et usages",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "MIT Technology Review",
-      "url": "https://www.technologyreview.com/",
-      "contenu": "Analyses de fond sur l'IA et ses effets sur la société",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "OpenAI News",
-      "url": "https://openai.com/news/",
-      "contenu": "Blog d'entreprise (OpenAI) : annonces de modèles et d'usages",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "CNBC – Tech",
-      "url": "https://www.cnbc.com/technology/",
-      "contenu": "Presse économique : marchés et entreprises de la tech",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "The GitHub Blog",
-      "url": "https://github.blog/",
-      "contenu": "Blog d'entreprise (GitHub) : développement logiciel et IA",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
-    },
-    {
-      "famille": "Repérage IA (sites anglophones)",
-      "nom": "The Verge – Artificial Intelligence",
-      "url": "https://www.theverge.com/ai-artificial-intelligence",
-      "contenu": "Presse tech : actualité de l'IA grand public",
-      "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
     }
-  ]
+  ],
+  "reperage_interne": {
+    "note": "Sites anglophones de Luc (Feeder) : repérage de sujets IA uniquement, jamais affichés ni cités ; un sujet n'est retenu que via une source officielle en français.",
+    "sites": [
+      {
+        "nom": "Ars Technica",
+        "url": "https://arstechnica.com/",
+        "contenu": "Presse tech américaine : IA, cybersécurité, régulation",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "AWS Machine Learning Blog",
+        "url": "https://aws.amazon.com/blogs/machine-learning/",
+        "contenu": "Blog d'entreprise (Amazon) : annonces de produits IA",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "BBC News – Technology",
+        "url": "https://www.bbc.com/news/technology",
+        "contenu": "Actualité tech internationale (service public britannique)",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "Cloudflare Blog",
+        "url": "https://blog.cloudflare.com/",
+        "contenu": "Blog d'entreprise : cybersécurité, trafic web, robots d'IA",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "Digital Trends",
+        "url": "https://www.digitaltrends.com/",
+        "contenu": "Presse tech grand public : produits et usages",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "MIT Technology Review",
+        "url": "https://www.technologyreview.com/",
+        "contenu": "Analyses de fond sur l'IA et ses effets sur la société",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "OpenAI News",
+        "url": "https://openai.com/news/",
+        "contenu": "Blog d'entreprise (OpenAI) : annonces de modèles et d'usages",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "CNBC – Tech",
+        "url": "https://www.cnbc.com/technology/",
+        "contenu": "Presse économique : marchés et entreprises de la tech",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "The GitHub Blog",
+        "url": "https://github.blog/",
+        "contenu": "Blog d'entreprise (GitHub) : développement logiciel et IA",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      },
+      {
+        "nom": "The Verge – Artificial Intelligence",
+        "url": "https://www.theverge.com/ai-artificial-intelligence",
+        "contenu": "Presse tech : actualité de l'IA grand public",
+        "desc": "Repérage uniquement, jamais cité : sujets IA et numérique éducatif, repris seulement via une source en français."
+      }
+    ]
+  }
 }
