@@ -154,6 +154,16 @@ def main():
             etat.append({"source": src_id, "nom": nom, "url": url, "ok": True, "lus": len(lot), "retenus": len(garde)})
         except Exception as e:  # une source en panne ne bloque pas les autres
             etat.append({"source": src_id, "nom": nom, "url": url, "ok": False, "erreur": str(e)[:200]})
+    # Conserver ce qui a été collecté par ailleurs (lecture via Chrome le dimanche, champ
+    # "collecte": "chrome") pour les sources que ce robot n'a pas pu lire.
+    try:
+        precedent = json.loads(SORTIE.read_text(encoding="utf-8")) if SORTIE.exists() else {}
+    except Exception:
+        precedent = {}
+    en_echec = {s["source"] for s in etat if not s["ok"]}
+    for x in precedent.get("items", []):
+        if (x.get("collecte") == "chrome" or x.get("source") in en_echec) and (not x.get("date") or x["date"] >= limite):
+            tous.append(x)
     # dédoublonnage par URL, tri : priorité puis date décroissante
     vus, uniques = set(), []
     for x in sorted(tous, key=lambda x: (x["priorite"], "" if not x["date"] else "~" + x["date"]), reverse=False):
@@ -176,6 +186,7 @@ def main():
         "perimetre": "IA et numérique uniquement (filtre par mots-clés, à valider éditorialement)",
         "sources": etat,
         "items": uniques,
+        "sources_chrome": precedent.get("sources_chrome", []),
     }
     SORTIE.write_text(json.dumps(donnees, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     for s in etat:
