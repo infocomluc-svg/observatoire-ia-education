@@ -122,7 +122,7 @@
       "resume": "Ressources pour le thème 4 de droit en CEJM : « Dans quelle mesure le droit répond-il aux questions posées par le développement du numérique ? ». Démarche de classe inversée (3 capsules vidéo et plan de synthèse), puis cas VeePee : protection des actifs immatériels, des personnes et des données, contrats de prestation numérique.",
       "rubrique": "Ressources pédagogiques CEJM",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "creg",
@@ -134,7 +134,7 @@
       "resume": "Contrats signés à distance, courriers et documents transmis : dans un environnement de plus en plus numérique, retracer et conserver les échanges devient un enjeu concret pour les entreprises. Présentation du dossier « Preuves et Droit » du Village de la Justice sur les nouveaux enjeux de la preuve.",
       "rubrique": "#Droit",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "creg",
@@ -146,7 +146,7 @@
       "resume": "Présentation de L'Assistant, l'outil d'intelligence artificielle générative de la DINUM qui accompagne les agents publics dans leurs activités professionnelles.",
       "rubrique": "Intelligence Artificielle",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "creg",
@@ -158,7 +158,7 @@
       "resume": "Plateforme développée au lycée Gaspard Monge qui immerge les élèves de la filière transport-logistique dans des situations professionnelles simulées : environnements métiers, scénarios pédagogiques et suivi des compétences des référentiels.",
       "rubrique": "Groupe d'Expérimentation Pédagogique au numérique Economie-Gestion",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "lille-ecogest",
@@ -170,7 +170,7 @@
       "resume": "Compte rendu du forum « Faites du Numérique » organisé par la DRANE de Lille le 4 novembre 2026 à la Halle aux sucres de Dunkerque : 17 exposants sur 6 thématiques (objets connectés, sécurité numérique, communication, élèves à besoins particuliers, codage…).",
       "rubrique": "Actualités académiques, IANE, Outils numériques, IA",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -182,7 +182,7 @@
       "resume": "La DRANE Hauts-de-France présente CitizenCode, plateforme gratuite et clé en main, conforme aux programmes, pour initier les élèves de collège et lycée à la programmation, à la culture numérique et à un usage critique de l'intelligence artificielle.",
       "rubrique": "IA, Les ressources, Pix",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -206,7 +206,7 @@
       "resume": "Réseaux sociaux, information, intelligence artificielle, inclusion, sobriété numérique : la DRANE Hauts-de-France, les cellules EMI et les DRAEAC d'Amiens et de Lille lancent un concours pour que les élèves réfléchissent à leurs usages numériques, débattent et fassent entendre leur point de vue.",
       "rubrique": "News en bref, nouveauté",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -218,7 +218,7 @@
       "resume": "Annonce de la journée de l'innovation « Faites du numérique » à la Halle aux Sucres de Dunkerque, avec teaser vidéo et programme.",
       "rubrique": "A la une",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -254,7 +254,7 @@
       "resume": "Guide pratique pour utiliser et protéger les œuvres en classe dans le respect des règles juridiques : le droit d'auteur, enjeu quotidien des enseignants qui illustrent leurs cours ou créent leurs propres supports pédagogiques.",
       "rubrique": "Les ressources, News en bref",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -266,7 +266,7 @@
       "resume": "Info-lettre de la DRANE de Lille d'octobre 2026 : événements, concours et dates à noter du numérique éducatif, dont la citoyenneté numérique ; version PDF téléchargeable.",
       "rubrique": "formation",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -278,7 +278,7 @@
       "resume": "Internet Sans Crainte (Tralalère) publie deux ressources gratuites et clés en main pour le collège et le lycée, afin d'ancrer l'éducation au numérique et la lutte contre les violences scolaires, dont « Stop la violence ! ».",
       "rubrique": "IA, Les ressources, News en bref",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -290,6 +290,18 @@
       "resume": "À l'occasion du Cybermois d'octobre, EDIFICE et Advens proposent à la communauté éducative un programme de rendez-vous gratuits pour se former et échanger sur la cybersécurité, alors que les attaques cyber se multiplient.",
       "rubrique": "ENT, News en bref",
       "collecte": "chrome",
+      "nouveau_depuis_derniere_collecte": false
+    },
+    {
+      "source": "crcom",
+      "nom_source": "CRCOM (réseau national communication, management, économie-droit)",
+      "priorite": 1,
+      "titre": "STMG - Monographie RAUGI - MSDGN",
+      "url": "https://crcom.ac-versailles.fr/STMG-Monographie-RAUGI-MSDGN",
+      "date": "2026-09-18",
+      "resume": "Monographie d'entreprise couvrant l'ensemble du programme de MSGN de terminale, dont le système d'information et la numérisation (à vérifier : ressource transversale, pas spécifiquement numérique).",
+      "rubrique": "Management, sciences de gestion et numérique",
+      "collecte": "chrome",
       "nouveau_depuis_derniere_collecte": true
     }
   ],
@@ -298,29 +310,33 @@
       "source": "crcom",
       "url": "https://crcom.ac-versailles.fr/spip.php?page=backend",
       "ok": true,
-      "retenus": 1,
-      "lu_le": "2026-11-07"
+      "retenus": 2,
+      "lu_le": "2026-11-07",
+      "voie": "Chrome (conversation)"
     },
     {
       "source": "creg",
       "url": "https://creg.ac-versailles.fr/spip.php?page=backend",
       "ok": true,
       "retenus": 3,
-      "lu_le": "2026-11-07"
+      "lu_le": "2026-11-07",
+      "voie": "Chrome (conversation)"
     },
     {
       "source": "lille-ecogest",
       "url": "https://pedagogie.ac-lille.fr/ecogestion/feed/",
       "ok": true,
       "retenus": 1,
-      "lu_le": "2026-11-07"
+      "lu_le": "2026-11-07",
+      "voie": "Chrome (conversation)"
     },
     {
       "source": "drane-lille",
       "url": "https://dane.site.ac-lille.fr/feed/",
       "ok": true,
-      "retenus": 10,
-      "lu_le": "2026-11-07"
+      "retenus": 7,
+      "lu_le": "2026-11-07",
+      "voie": "Chrome (conversation)"
     }
   ]
 }
