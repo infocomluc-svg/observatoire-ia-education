@@ -53,7 +53,7 @@ RE_MOTS = re.compile("|".join(MOTS), re.I)
 
 def lire(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
-    with urllib.request.urlopen(req, timeout=40) as r:
+    with urllib.request.urlopen(req, timeout=20) as r:
         return r.read().decode("utf-8", errors="replace")
 
 
