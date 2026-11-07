@@ -1,5 +1,5 @@
 {
-  "genere_le": "2026-11-07T12:10Z",
+  "genere_le": "2026-11-07T12:16Z",
   "perimetre": "IA et numérique uniquement (filtre par mots-clés, à valider éditorialement)",
   "sources": [
     {
@@ -20,8 +20,9 @@
       "source": "edunum",
       "nom": "Éduscol – Cahiers ÉduNum",
       "url": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "ok": false,
-      "erreur": "HTTP Error 403: Forbidden"
+      "ok": true,
+      "lus": 25,
+      "retenus": 6
     },
     {
       "source": "lille-ecogest",
@@ -36,14 +37,80 @@
       "url": "https://dane.site.ac-lille.fr/feed/",
       "ok": false,
       "erreur": "<urlopen error timed out>"
-    },
-    {
-      "source": "certa",
-      "nom": "Réseau CERTA",
-      "url": "https://www.reseaucerta.org/rss.xml",
-      "ok": false,
-      "erreur": "HTTP Error 404: Not Found"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "source": "edunum",
+      "nom_source": "Éduscol – Cahiers ÉduNum",
+      "priorite": 1,
+      "titre": "Cahier ÉduNum Thématique n° 29 - octobre 2026",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-thematique-ndeg-29-novembre-2026-130437.pdf",
+      "date": "2026-10-01",
+      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette nouvelle édition thématiquedes Cahiers ÉduNum sur le numérique pour l'éducation explorela notion…",
+      "rubrique": "Cahiers ÉduNum",
+      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "nouveau_depuis_derniere_collecte": true
+    },
+    {
+      "source": "edunum",
+      "nom_source": "Éduscol – Cahiers ÉduNum",
+      "priorite": 1,
+      "titre": "Cahier ÉduNum Économie-gestion n° 65 - octobre 2026",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-economie-gestion-ndeg-65-octobre-2026-130434.pdf",
+      "date": "2026-10-01",
+      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette nouvelle édition en économie-gestion porte sur la manière dont les systèmes d'IA peuvent…",
+      "rubrique": "Cahiers ÉduNum",
+      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "nouveau_depuis_derniere_collecte": true
+    },
+    {
+      "source": "edunum",
+      "nom_source": "Éduscol – Cahiers ÉduNum",
+      "priorite": 1,
+      "titre": "Cahier ÉduNum Éducation musicale n° 12 - octobre 2026",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-education-musicale-ndeg-12-octobre-2026-130413.pdf",
+      "date": "2026-10-01",
+      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette nouvelle éditionexplore comment le numérique permet de concevoir des activités innovantes et…",
+      "rubrique": "Cahiers ÉduNum",
+      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "nouveau_depuis_derniere_collecte": true
+    },
+    {
+      "source": "edunum",
+      "nom_source": "Éduscol – Cahiers ÉduNum",
+      "priorite": 1,
+      "titre": "Cahier ÉduNum Histoire des arts n° 12 - octobre 2026",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-histoire-des-arts-ndeg-12-octobre-2026-130452.pdf",
+      "date": "2026-10-01",
+      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette édition s’intéresse à la manière de penser et d’accompagner l’introduction de l’IA dans les…",
+      "rubrique": "Cahiers ÉduNum",
+      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "nouveau_depuis_derniere_collecte": true
+    },
+    {
+      "source": "edunum",
+      "nom_source": "Éduscol – Cahiers ÉduNum",
+      "priorite": 1,
+      "titre": "Cahier ÉduNum Physique-Chimie n° 40 - octobre 2026",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-physique-chimie-ndeg-40-octobre-2026-130410.pdf",
+      "date": "2026-10-01",
+      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette édition aborde l’intelligence artificielle comme objet de réflexion dans le cadre de…",
+      "rubrique": "Cahiers ÉduNum",
+      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "nouveau_depuis_derniere_collecte": true
+    },
+    {
+      "source": "edunum",
+      "nom_source": "Éduscol – Cahiers ÉduNum",
+      "priorite": 1,
+      "titre": "Lettre ÉduNum SES n° 22 - octobre 2026",
+      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/lettre-edunum-ses-ndeg-22-octobre-2026-130467.pdf",
+      "date": "2026-10-01",
+      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Ce cahier propose une synthèse des expérimentations récentes autour des usages de l’IA générative en…",
+      "rubrique": "Cahiers ÉduNum",
+      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "nouveau_depuis_derniere_collecte": true
+    }
+  ]
 }
