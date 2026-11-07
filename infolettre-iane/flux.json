@@ -1,0 +1,49 @@
+{
+  "genere_le": "2026-11-07T12:10Z",
+  "perimetre": "IA et numérique uniquement (filtre par mots-clés, à valider éditorialement)",
+  "sources": [
+    {
+      "source": "crcom",
+      "nom": "CRCOM (réseau national communication, management, économie-droit)",
+      "url": "https://crcom.ac-versailles.fr/spip.php?page=backend",
+      "ok": false,
+      "erreur": "<urlopen error timed out>"
+    },
+    {
+      "source": "creg",
+      "nom": "CREG – académie de Versailles",
+      "url": "https://creg.ac-versailles.fr/spip.php?page=backend",
+      "ok": false,
+      "erreur": "<urlopen error timed out>"
+    },
+    {
+      "source": "edunum",
+      "nom": "Éduscol – Cahiers ÉduNum",
+      "url": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
+      "ok": false,
+      "erreur": "HTTP Error 403: Forbidden"
+    },
+    {
+      "source": "lille-ecogest",
+      "nom": "Académie de Lille – pédagogie économie-gestion",
+      "url": "https://pedagogie.ac-lille.fr/ecogestion/feed/",
+      "ok": false,
+      "erreur": "<urlopen error timed out>"
+    },
+    {
+      "source": "drane-lille",
+      "nom": "DRANE de Lille",
+      "url": "https://dane.site.ac-lille.fr/feed/",
+      "ok": false,
+      "erreur": "<urlopen error timed out>"
+    },
+    {
+      "source": "certa",
+      "nom": "Réseau CERTA",
+      "url": "https://www.reseaucerta.org/rss.xml",
+      "ok": false,
+      "erreur": "HTTP Error 404: Not Found"
+    }
+  ],
+  "items": []
+}
