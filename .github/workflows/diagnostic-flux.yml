@@ -1,0 +1,14 @@
+name: Diagnostic accès aux flux (temporaire)
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+          for u in "https://crcom.ac-versailles.fr/spip.php?page=backend" "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif"; do
+            echo "== direct $u"; curl -s -o /dev/null -w "%{http_code} %{time_total}s\n" -m 25 -A "$UA" "$u" || echo echec
+            echo "== allorigins"; curl -s -m 40 "https://api.allorigins.win/raw?url=$(python3 -c 'import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=""))' "$u")" | head -c 300; echo
+            echo "== jina"; curl -s -m 40 "https://r.jina.ai/$u" | head -c 300; echo
+            echo "== rss2json"; curl -s -m 40 "https://api.rss2json.com/v1/api.json?rss_url=$(python3 -c 'import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=""))' "$u")" | head -c 300; echo
+          done
