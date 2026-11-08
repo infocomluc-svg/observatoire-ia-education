@@ -323,7 +323,7 @@ footer a{color:var(--hero-ink)}
         <div><strong>32</strong>sources référencées</div>
         <div><strong>5</strong>familles de sources</div>
         <div><strong>4</strong>gabarits d'agent de veille</div>
-        <div><strong id="today-date">3 nov. 2026</strong>dernière vérification</div>
+        <div><strong id="today-date">7 nov. 2026</strong>dernière vérification</div>
       </div>
       <a class="newsbar" id="newsbar" href="#ia-generale" hidden><span aria-hidden="true">🆕</span><span><b id="newscount">0</b> <span id="newslabel">nouveautés</span> depuis la mise à jour précédente</span><span>Voir →</span></a>
     </div>
@@ -490,8 +490,8 @@ footer a{color:var(--hero-ink)}
 
   /* Badge NEW : une source porte nouveau:"AAAA-MM-JJ" (date d'ajout ou de nouvelle information)
      et nouveaute:"ce qui est nouveau". Elle est marquée NEW si cette date est postérieure à VERIF_PRECEDENTE. */
-  var DERNIERE_VERIF = "2026-11-03";
-  var VERIF_PRECEDENTE = "2026-10-19";
+  var DERNIERE_VERIF = "2026-11-07";
+  var VERIF_PRECEDENTE = "2026-11-03";
   window.OBS_VERIF_PRECEDENTE = VERIF_PRECEDENTE;
   function isNew(d){ return !!d && d > VERIF_PRECEDENTE; }
   window.OBS_isNew = isNew;
@@ -508,8 +508,8 @@ footer a{color:var(--hero-ink)}
     {tag:"recherche", label:"Recherche", title:"Inria — Intelligence artificielle", desc:"Institut national de recherche en sciences du numérique ; expertises et publications de référence sur les fondements techniques de l'IA.", url:"https://www.inria.fr/fr/intelligence-artificielle", freq:"Mensuel"},
     {tag:"recherche", label:"Recherche", title:"CNRS — Dossiers IA", desc:"Centre national de la recherche scientifique ; articles de vulgarisation scientifique et points d'étape sur la recherche française en IA.", url:"https://www.cnrs.fr/fr", freq:"Mensuel"},
     {tag:"recherche", label:"Recherche", title:"HAL — Archive ouverte", desc:"Plateforme nationale de dépôt de publications scientifiques ; recherche par mot-clé « intelligence artificielle » pour accéder aux articles évalués par les pairs.", url:"https://hal.science/", freq:"Continu (dépôts)"},
-    {tag:"recherche", label:"Recherche", title:"OCDE — Politiques de l'IA", desc:"Organisation de coopération et de développement économiques ; observatoire des politiques publiques d'IA (OECD.AI) et publications en français.", url:"https://www.oecd.org/fr/publications/serie-sur-l-intelligence-artificielle-et-l-avenir-des-competences_20730603.html", freq:"Trimestriel"},
-    {tag:"eu", label:"UE", title:"Programme pour une Europe numérique", desc:"Actualités de la stratégie numérique de l'UE (Digital Strategy), incluant IA, données et compétences numériques, en français.", url:"https://digital-strategy.ec.europa.eu/fr", freq:"Hebdomadaire"},
+    {tag:"recherche", label:"Recherche", title:"OCDE — Politiques de l'IA", desc:"Organisation de coopération et de développement économiques ; observatoire des politiques publiques d'IA (OECD.AI) et publications en français.", url:"https://www.oecd.org/fr/publications/serie-sur-l-intelligence-artificielle-et-l-avenir-des-competences_20730603.html", freq:"Trimestriel", nouveau:"2026-11-07", nouveaute:"Nouveau : publication le 5 novembre 2026 des « Perspectives de l'économie et de la société numériques de l'OCDE 2026 » (Digital Economy and Society Outlook), qui constatent une accélération de l'adoption de l'IA mais des écarts marqués entre entreprises et entre générations."},
+    {tag:"eu", label:"UE", title:"Programme pour une Europe numérique", desc:"Actualités de la stratégie numérique de l'UE (Digital Strategy), incluant IA, données et compétences numériques, en français.", url:"https://digital-strategy.ec.europa.eu/fr", freq:"Hebdomadaire", nouveau:"2026-11-07", nouveaute:"Nouveau : la Commission a lancé le 5 novembre 2026 un paquet « Éducation et compétences » dont l'une des quatre priorités est de mettre les outils numériques et l'IA au service de l'éducation, avec la création le 3 novembre 2026 du consortium EDU-EDIC pour déployer des services d'IA de confiance dans les écoles."},
     {tag:"fr", label:"France", title:"Conseil de l'IA et du numérique", desc:"Organe consultatif rattaché au gouvernement (ex-Conseil national du numérique, renommé en 2025) ; rapports, notes et avis publics sur la stratégie française en matière d'intelligence artificielle, dont des travaux conjoints avec la CNIL sur l'IA agentique.", url:"https://www.conseil-ia-numerique.fr/", freq:"Ponctuel (rapports et notes)"}
   ];
 
@@ -530,8 +530,8 @@ footer a{color:var(--hero-ink)}
     {tag:"franco", label:"Francophonie", title:"OBVIA — Observatoire IA et numérique", desc:"Observatoire international sur les impacts sociétaux de l'IA et du numérique (Québec) ; recherche interdisciplinaire évaluée par les pairs.", url:"https://www.obvia.ca/", freq:"Mensuel"},
     {tag:"recherche", label:"Recherche", title:"IFé — Institut français de l'Éducation", desc:"Institut de recherche de l'ENS de Lyon dédié aux sciences de l'éducation ; publications et dossiers sur le numérique éducatif.", url:"https://ife.ens-lyon.fr/", freq:"Mensuel"},
     {tag:"recherche", label:"Recherche", title:"Réseau Canopé", desc:"Opérateur public du ministère de l'Éducation nationale pour la formation et l'accompagnement pédagogique ; ressources IA validées par l'institution.", url:"https://www.reseau-canope.fr/", freq:"Hebdomadaire"},
-    {tag:"eu", label:"UE", title:"Réseau Eurydice", desc:"Réseau officiel de l'Agence exécutive européenne pour l'éducation et la culture (EACEA) ; analyses comparatives des politiques éducatives nationales, incluant les usages de l'IA en classe.", url:"https://eurydice.eacea.ec.europa.eu/", freq:"Mensuel", nouveau:"2026-11-03", nouveaute:"Nouvelle source ajoutée à l'observatoire le 3 novembre 2026."},
-    {tag:"fr", label:"France", title:"France Éducation international — IA en éducation", desc:"Groupement d'intérêt public sous tutelle des ministères de l'Éducation nationale et de l'Europe et des Affaires étrangères ; analyses sur l'IA en éducation en perspective internationale.", url:"https://www.france-education-international.fr/actualites/lintelligence-artificielle-en-education-quel-cadre-pour-quels-usages", freq:"Ponctuel (dossiers et analyses)", nouveau:"2026-11-03", nouveaute:"Nouvelle source ajoutée à l'observatoire le 3 novembre 2026."}
+    {tag:"eu", label:"UE", title:"Réseau Eurydice", desc:"Réseau officiel de l'Agence exécutive européenne pour l'éducation et la culture (EACEA) ; analyses comparatives des politiques éducatives nationales, incluant les usages de l'IA en classe.", url:"https://eurydice.eacea.ec.europa.eu/", freq:"Mensuel"},
+    {tag:"fr", label:"France", title:"France Éducation international — IA en éducation", desc:"Groupement d'intérêt public sous tutelle des ministères de l'Éducation nationale et de l'Europe et des Affaires étrangères ; analyses sur l'IA en éducation en perspective internationale.", url:"https://www.france-education-international.fr/actualites/lintelligence-artificielle-en-education-quel-cadre-pour-quels-usages", freq:"Ponctuel (dossiers et analyses)"}
   ];
 
   var REGULATION = [
