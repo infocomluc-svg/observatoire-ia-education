@@ -1,5 +1,5 @@
 {
-  "genere_le": "2026-11-07T12:16Z",
+  "genere_le": "2026-11-09T13:06Z",
   "perimetre": "IA et numérique uniquement (filtre par mots-clés, à valider éditorialement)",
   "sources": [
     {
@@ -21,8 +21,8 @@
       "nom": "Éduscol – Cahiers ÉduNum",
       "url": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
       "ok": true,
-      "lus": 25,
-      "retenus": 6
+      "lus": 0,
+      "retenus": 0
     },
     {
       "source": "lille-ecogest",
@@ -40,78 +40,6 @@
     }
   ],
   "items": [
-    {
-      "source": "edunum",
-      "nom_source": "Éduscol – Cahiers ÉduNum",
-      "priorite": 1,
-      "titre": "Cahier ÉduNum Thématique n° 29 - octobre 2026",
-      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-thematique-ndeg-29-novembre-2026-130437.pdf",
-      "date": "2026-10-01",
-      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette nouvelle édition thématiquedes Cahiers ÉduNum sur le numérique pour l'éducation explorela notion…",
-      "rubrique": "Cahiers ÉduNum",
-      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "nouveau_depuis_derniere_collecte": true
-    },
-    {
-      "source": "edunum",
-      "nom_source": "Éduscol – Cahiers ÉduNum",
-      "priorite": 1,
-      "titre": "Cahier ÉduNum Économie-gestion n° 65 - octobre 2026",
-      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-economie-gestion-ndeg-65-octobre-2026-130434.pdf",
-      "date": "2026-10-01",
-      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette nouvelle édition en économie-gestion porte sur la manière dont les systèmes d'IA peuvent…",
-      "rubrique": "Cahiers ÉduNum",
-      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "nouveau_depuis_derniere_collecte": true
-    },
-    {
-      "source": "edunum",
-      "nom_source": "Éduscol – Cahiers ÉduNum",
-      "priorite": 1,
-      "titre": "Cahier ÉduNum Éducation musicale n° 12 - octobre 2026",
-      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-education-musicale-ndeg-12-octobre-2026-130413.pdf",
-      "date": "2026-10-01",
-      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette nouvelle éditionexplore comment le numérique permet de concevoir des activités innovantes et…",
-      "rubrique": "Cahiers ÉduNum",
-      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "nouveau_depuis_derniere_collecte": true
-    },
-    {
-      "source": "edunum",
-      "nom_source": "Éduscol – Cahiers ÉduNum",
-      "priorite": 1,
-      "titre": "Cahier ÉduNum Histoire des arts n° 12 - octobre 2026",
-      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-histoire-des-arts-ndeg-12-octobre-2026-130452.pdf",
-      "date": "2026-10-01",
-      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette édition s’intéresse à la manière de penser et d’accompagner l’introduction de l’IA dans les…",
-      "rubrique": "Cahiers ÉduNum",
-      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "nouveau_depuis_derniere_collecte": true
-    },
-    {
-      "source": "edunum",
-      "nom_source": "Éduscol – Cahiers ÉduNum",
-      "priorite": 1,
-      "titre": "Cahier ÉduNum Physique-Chimie n° 40 - octobre 2026",
-      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/cahier-edunum-physique-chimie-ndeg-40-octobre-2026-130410.pdf",
-      "date": "2026-10-01",
-      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Cette édition aborde l’intelligence artificielle comme objet de réflexion dans le cadre de…",
-      "rubrique": "Cahiers ÉduNum",
-      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "nouveau_depuis_derniere_collecte": true
-    },
-    {
-      "source": "edunum",
-      "nom_source": "Éduscol – Cahiers ÉduNum",
-      "priorite": 1,
-      "titre": "Lettre ÉduNum SES n° 22 - octobre 2026",
-      "url": "https://eduscol.education.gouv.fr/sites/default/files/document/lettre-edunum-ses-ndeg-22-octobre-2026-130467.pdf",
-      "date": "2026-10-01",
-      "resume": "Fermer ## Connexion requise Cette fonctionnalité est destinée aux agents de l'éducation nationale. Pour ajouter cet élément à vos favoris, inscrivez-vous ou connectez-vous. Annuler[Se connecter](https://eduscol.education.gouv.fr/cas?returnto=/6699/les-cahiers-edunum-sur-le-numerique-educatif) Ce cahier propose une synthèse des expérimentations récentes autour des usages de l’IA générative en…",
-      "rubrique": "Cahiers ÉduNum",
-      "page": "https://eduscol.education.gouv.fr/6699/les-cahiers-edunum-sur-le-numerique-educatif",
-      "nouveau_depuis_derniere_collecte": true
-    },
     {
       "source": "crcom",
       "nom_source": "CRCOM (réseau national communication, management, économie-droit)",
@@ -161,14 +89,14 @@
       "nouveau_depuis_derniere_collecte": false
     },
     {
-      "source": "lille-ecogest",
-      "nom_source": "Académie de Lille – pédagogie économie-gestion",
-      "priorite": 2,
-      "titre": "FAITES DU NUMERIQUE – DRANE de Lille",
-      "url": "https://pedagogie.ac-lille.fr/ecogestion/faites-du-numerique-drane-de-lille/",
-      "date": "2026-11-05",
-      "resume": "Compte rendu du forum « Faites du Numérique » organisé par la DRANE de Lille le 4 novembre 2026 à la Halle aux sucres de Dunkerque : 17 exposants sur 6 thématiques (objets connectés, sécurité numérique, communication, élèves à besoins particuliers, codage…).",
-      "rubrique": "Actualités académiques, IANE, Outils numériques, IA",
+      "source": "crcom",
+      "nom_source": "CRCOM (réseau national communication, management, économie-droit)",
+      "priorite": 1,
+      "titre": "STMG - Monographie RAUGI - MSDGN",
+      "url": "https://crcom.ac-versailles.fr/STMG-Monographie-RAUGI-MSDGN",
+      "date": "2026-09-18",
+      "resume": "Monographie d'entreprise couvrant l'ensemble du programme de MSGN de terminale, dont le système d'information et la numérisation (à vérifier : ressource transversale, pas spécifiquement numérique).",
+      "rubrique": "Management, sciences de gestion et numérique",
       "collecte": "chrome",
       "nouveau_depuis_derniere_collecte": false
     },
@@ -185,6 +113,18 @@
       "nouveau_depuis_derniere_collecte": false
     },
     {
+      "source": "lille-ecogest",
+      "nom_source": "Académie de Lille – pédagogie économie-gestion",
+      "priorite": 2,
+      "titre": "FAITES DU NUMERIQUE – DRANE de Lille",
+      "url": "https://pedagogie.ac-lille.fr/ecogestion/faites-du-numerique-drane-de-lille/",
+      "date": "2026-11-05",
+      "resume": "Compte rendu du forum « Faites du Numérique » organisé par la DRANE de Lille le 4 novembre 2026 à la Halle aux sucres de Dunkerque : 17 exposants sur 6 thématiques (objets connectés, sécurité numérique, communication, élèves à besoins particuliers, codage…).",
+      "rubrique": "Actualités académiques, IANE, Outils numériques, IA",
+      "collecte": "chrome",
+      "nouveau_depuis_derniere_collecte": false
+    },
+    {
       "source": "drane-lille",
       "nom_source": "DRANE de Lille",
       "priorite": 2,
@@ -194,7 +134,7 @@
       "resume": "Trois ressources gratuites du programme Internet Sans Crainte (Tralalère) pour bâtir des séances d'éducation au numérique qui accrochent les élèves et font parler toute la classe.",
       "rubrique": "News en bref",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -230,7 +170,7 @@
       "resume": "Le laboratoire CRIStAL propose un stage non mixte pour les collégiennes de 3ᵉ du 14 au 18 décembre 2026 à Villeneuve-d'Ascq, afin de leur faire découvrir l'informatique et le monde du numérique autrement.",
       "rubrique": "News en bref",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -242,7 +182,7 @@
       "resume": "Le projet IOTA propose une plateforme pédagogique pour développer les compétences numériques des élèves du CE2 au CM2, avec une pédagogie ludique fondée sur l'entraide, la coopération et l'évaluation entre pairs.",
       "rubrique": "A la une",
       "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
+      "nouveau_depuis_derniere_collecte": false
     },
     {
       "source": "drane-lille",
@@ -291,18 +231,6 @@
       "rubrique": "ENT, News en bref",
       "collecte": "chrome",
       "nouveau_depuis_derniere_collecte": false
-    },
-    {
-      "source": "crcom",
-      "nom_source": "CRCOM (réseau national communication, management, économie-droit)",
-      "priorite": 1,
-      "titre": "STMG - Monographie RAUGI - MSDGN",
-      "url": "https://crcom.ac-versailles.fr/STMG-Monographie-RAUGI-MSDGN",
-      "date": "2026-09-18",
-      "resume": "Monographie d'entreprise couvrant l'ensemble du programme de MSGN de terminale, dont le système d'information et la numérisation (à vérifier : ressource transversale, pas spécifiquement numérique).",
-      "rubrique": "Management, sciences de gestion et numérique",
-      "collecte": "chrome",
-      "nouveau_depuis_derniere_collecte": true
     }
   ],
   "sources_chrome": [
