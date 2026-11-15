@@ -1,0 +1,34 @@
+{
+  "genere_le": "2026-11-15",
+  "periode": {
+    "du": "2026-11-08",
+    "au": "2026-11-15"
+  },
+  "synthese": "Semaine dominée par la protection des publics vulnérables face à l'IA générative : le Conseil de l'IA et du numérique rend public son rapport « Protéger sans empêcher », qui fait de la formation de toute la population à l'IA, dès le plus jeune âge, l'une de ses priorités. L'UNESCO lance un guide pour enseigner l'éducation aux médias et à l'information à l'ère de l'IA, destiné aux enseignants. Côté réglementation, aucune nouvelle échéance de l'AI Act n'a été publiée ; la CNIL relaie une action coordonnée des autorités européennes sur le recrutement assisté par IA.",
+  "items": [
+    {
+      "titre": "Protéger sans empêcher : nos vulnérabilités à l'ère de l'IA générative",
+      "source": "Conseil de l'intelligence artificielle et du numérique",
+      "url": "https://www.conseil-ia-numerique.fr/nos-travaux/proteger-sans-empecher-nos-vulnerabilites-lere-de-lia-generative",
+      "date": "",
+      "categorie": "ia-generale",
+      "resume": "Rapport de la commission « IA générative et vulnérabilités » (18 recommandations, 55 auditions) sur la dette cognitive, la dépendance aux compagnons IA et les deepfakes. Il souligne la vulnérabilité particulière des mineurs et recommande de former massivement la population à l'IA dès le plus jeune âge."
+    },
+    {
+      "titre": "AI Answers. You Decide : l'UNESCO lance un guide d'éducation aux médias et à l'information à l'ère de l'IA",
+      "source": "UNESCO",
+      "url": "https://www.unesco.org/en/articles/ai-answers-you-decide-unesco-launches-new-media-and-information-literacy-curriculum",
+      "date": "2026-11-10",
+      "categorie": "education",
+      "resume": "Guide destiné aux enseignants, aux formateurs d'enseignants et aux concepteurs de programmes, organisé en cinq thèmes (IA au quotidien, médias, esprit critique, droits humains, avenir) avec activités et questions de discussion. Page disponible en anglais uniquement à ce jour."
+    },
+    {
+      "titre": "Actualité du CEPD : adéquation de la Corée du Sud, versions finales des BCR-ST et action coordonnée sur le recrutement assisté par IA",
+      "source": "CNIL / Comité européen de la protection des données",
+      "url": "https://www.cnil.fr/fr/actualite-du-cepd-adequation-de-la-coree-du-sud-versions-finales-des-bcr-st-et-action-coordonnee-sur",
+      "date": "2026-11-12",
+      "categorie": "reglementation",
+      "resume": "La CNIL relaie les décisions du CEPD, dont le lancement d'une action coordonnée des autorités européennes de protection des données sur l'usage de l'IA dans le recrutement."
+    }
+  ]
+}
